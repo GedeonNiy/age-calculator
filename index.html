@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Calculate your age and date differences easily with our free online calculators. Find out your exact age in years, months, and days, or calculate the difference between any two dates." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Age & Date Difference Calculator</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Site Header with Navigation -->
+      <header class="site-header">
+        <div class="header-content">
+          <div class="logo">
+            <h1 class="site-title">Smart Age & Date Tools</h1>
+          </div>
+          <nav class="main-nav">
+            <button type="button" class="nav-link" data-view="view-home">Home</button>
+            <button type="button" class="nav-link" data-view="view-about">About</button>
+            <button type="button" class="nav-link" data-view="view-privacy">Privacy Policy</button>
+            <button type="button" class="nav-link" data-view="view-contact">Contact</button>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Home View (Calculators) -->
+      <section id="view-home" class="view">
+        <main>
+          <div class="calculators-container">
+            <!-- Age Calculator Section -->
+            <section class="calculator-card">
+              <h2>Age Calculator</h2>
+              <div class="form-group">
+                <label for="dob-input">Date of birth</label>
+                <input type="date" id="dob-input" name="dob" />
+              </div>
+              <button type="button" id="calculate-age-btn">Calculate Age</button>
+              <div id="age-result" class="result"></div>
+            </section>
+
+            <!-- Date Difference Calculator Section -->
+            <section class="calculator-card">
+              <h2>Date Difference Calculator</h2>
+              <div class="form-group">
+                <label for="start-date-input">Start date</label>
+                <input type="date" id="start-date-input" name="start-date" />
+              </div>
+              <div class="form-group">
+                <label for="end-date-input">End date</label>
+                <input type="date" id="end-date-input" name="end-date" />
+              </div>
+              <button type="button" id="calculate-difference-btn">Calculate Difference</button>
+              <div id="difference-result" class="result"></div>
+            </section>
+          </div>
+
+          <!-- SEO Content Section -->
+          <section class="content-section">
+            <h2>What is an Age Calculator?</h2>
+            <p>
+              An age calculator is a useful tool that helps you determine your exact age or the age of someone else based on their date of birth. It calculates the precise number of years, months, and days that have passed since the birth date. This tool is particularly helpful for various purposes such as verifying age for legal requirements, planning events, tracking milestones, or simply satisfying curiosity about how old you are down to the exact day.
+            </p>
+            <p>
+              Our age calculator uses accurate date calculations to provide you with a detailed breakdown of your age. Simply enter your date of birth, and the calculator will instantly show you your age in years, months, and days from that date to today. The calculation accounts for leap years and varying month lengths to ensure accuracy.
+            </p>
+
+            <h2>What is a Date Difference Calculator?</h2>
+            <p>
+              A date difference calculator is a practical tool that computes the time span between any two dates. Whether you need to know how many days until a deadline, how long a project has been running, or the duration between two significant events, this calculator provides you with the answer in multiple formats including days, weeks, months, and years.
+            </p>
+            <p>
+              This calculator is invaluable for project planning, event organization, tracking durations, calculating interest periods, or any situation where you need to know the exact time difference between two dates. It handles all the complexities of calendar calculations, including leap years and months with different numbers of days, to give you accurate results.
+            </p>
+
+            <h3>How accurate are these calculators?</h3>
+            <p>
+              Our calculators use precise date arithmetic that accounts for leap years, varying month lengths (28-31 days), and all calendar complexities. The results are accurate to the day, making them suitable for both personal and professional use.
+            </p>
+
+            <h3>Can I calculate age for dates in the future?</h3>
+            <p>
+              The age calculator is designed to calculate age from a date of birth to the current date. If you enter a future date of birth, the calculator will show an error message, as age cannot be calculated for dates that haven't occurred yet.
+            </p>
+
+            <h3>What if the end date is before the start date?</h3>
+            <p>
+              For the date difference calculator, the end date must be equal to or after the start date. If you enter an end date that is before the start date, you'll receive an error message prompting you to correct the dates. This ensures logical and meaningful results.
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- About View -->
+      <section id="view-about" class="view view-hidden">
+        <div class="content-page">
+          <h1>About This Site</h1>
+          <p>
+            Welcome to Smart Age & Date Tools, a free online resource designed to help you quickly and accurately calculate ages and date differences. Our mission is to provide simple, reliable tools that anyone can use without the need for complex software or technical knowledge.
+          </p>
+          <p>
+            All of our calculators are completely free to use, with no registration required and no hidden fees. We believe that useful tools should be accessible to everyone, which is why we've built this website with a focus on simplicity and ease of use. Whether you're calculating your age for a birthday, determining the duration between two important dates, or planning an event, our tools are here to help.
+          </p>
+          <p>
+            Our calculators use precise date arithmetic algorithms that account for leap years, varying month lengths, and all the complexities of the Gregorian calendar. This ensures that every calculation is accurate to the day, making our tools suitable for both personal use and professional applications.
+          </p>
+          <p>
+            We are committed to maintaining a fast, reliable, and user-friendly experience. Our website is designed to work seamlessly on desktop computers, tablets, and mobile devices, so you can access our tools whenever and wherever you need them. We continuously work to improve our services and add new features based on user feedback.
+          </p>
+        </div>
+      </section>
+
+      <!-- Privacy Policy View -->
+      <section id="view-privacy" class="view view-hidden">
+        <div class="content-page">
+          <h1>Privacy Policy</h1>
+          <p>
+            At Smart Age & Date Tools, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our website and calculators.
+          </p>
+          <p>
+            <strong>Information We Collect:</strong> Our calculators operate entirely on your device (client-side), which means we do not collect, store, or transmit any personal information or calculation data to our servers. All date calculations are performed locally in your web browser, ensuring complete privacy and security of your data.
+          </p>
+          <p>
+            <strong>Cookies and Analytics:</strong> We may use basic analytics tools to understand how visitors use our website, such as page views and general traffic patterns. This helps us improve our services. In the future, we may integrate Google AdSense to support the free operation of this website. AdSense may use cookies to serve personalized advertisements based on your browsing history. You can control cookie preferences through your browser settings.
+          </p>
+          <p>
+            <strong>Third-Party Services:</strong> If we implement advertising services like Google AdSense, these third-party vendors may use cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting your Google Ad Settings.
+          </p>
+          <p>
+            <strong>Data Security:</strong> Since all calculations are performed locally on your device, your data never leaves your computer or mobile device. We do not have access to any dates you enter or results you calculate. This ensures maximum privacy and security.
+          </p>
+          <p>
+            <strong>Changes to This Policy:</strong> We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically to stay informed about how we protect your information.
+          </p>
+          <p>
+            <strong>Contact:</strong> If you have any questions about this Privacy Policy, please contact us through our Contact page.
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact View -->
+      <section id="view-contact" class="view view-hidden">
+        <div class="content-page">
+          <h1>Contact</h1>
+          <p>
+            We'd love to hear from you! If you have questions, suggestions, feedback, or need assistance with our calculators, please don't hesitate to reach out. Your input helps us improve our tools and provide a better experience for all users.
+          </p>
+          <div class="contact-section">
+            <h2>Get in Touch</h2>
+            <p>
+              You can reach us via email at:
+            </p>
+            <p class="contact-email">
+              <a href="mailto:gedeon.niy@gmail.com">gedeon.niy@gmail.com</a>
+            </p>
+            <p>
+              We aim to respond to all inquiries within 24-48 hours during business days.
+            </p>
+          </div>
+          <div class="contact-form-section">
+            <h2>Send Us a Message</h2>
+            <form class="contact-form" id="contact-form">
+              <div class="form-group">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" placeholder="your.email@example.com" />
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="5" placeholder="Your message here..."></textarea>
+              </div>
+              <button type="submit">Send Message</button>
+            </form>
+            <p class="form-note">
+              <em>Note: This form is currently for display purposes. Please use the email address above to contact us.</em>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2025 Smart Age & Date Tools. Free to use.</p>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
