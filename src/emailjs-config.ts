@@ -9,11 +9,13 @@
  * 5. Replace the values below with your credentials
  */
 
+import { EMAILS } from './config/emails'
+
 export const EMAILJS_CONFIG = {
   PUBLIC_KEY: '1ccTjMutC_8UE9xE6',
   SERVICE_ID: 'service_2ytg8qi',
   TEMPLATE_ID: 'template_udd37ai',
-  TO_EMAIL: 'gedeon.niy@gmail.com', // Your email address
+  TO_EMAIL: EMAILS.contact, // Contact email address
 };
 
 // Check if EmailJS is configured

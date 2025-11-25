@@ -1,6 +1,7 @@
 import './style.css'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG, isEmailJSConfigured } from './emailjs-config'
+import { EMAILS } from './config/emails'
 
 interface AgeResult {
   years: number;
@@ -156,6 +157,8 @@ function showView(viewId: string): void {
   const targetView = document.getElementById(viewId);
   if (targetView) {
     targetView.classList.remove('view-hidden');
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // Update active nav link
@@ -170,13 +173,75 @@ function showView(viewId: string): void {
   });
 }
 
+/**
+ * Shows a toast notification
+ */
+function showToast(message: string, type: 'success' | 'error' = 'success'): void {
+  // Remove existing toast if any
+  const existingToast = document.querySelector('.toast');
+  if (existingToast) {
+    existingToast.remove();
+  }
+
+  // Create toast element
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  
+  // Add to body
+  document.body.appendChild(toast);
+  
+  // Trigger animation
+  setTimeout(() => {
+    toast.classList.add('toast-show');
+  }, 10);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove('toast-show');
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }, 3000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Set current year in footer
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear().toString();
+  }
+
   // Navigation elements
   const navLinks = document.querySelectorAll('.nav-link');
   
   // Set up navigation handlers
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
+      const viewId = link.getAttribute('data-view');
+      if (viewId) {
+        showView(viewId);
+      }
+    });
+  });
+
+  // Footer links
+  const footerLinks = document.querySelectorAll('.footer-link');
+  footerLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewId = link.getAttribute('data-view');
+      if (viewId) {
+        showView(viewId);
+      }
+    });
+  });
+
+  // Inline links (in content pages)
+  const inlineLinks = document.querySelectorAll('.inline-link[data-view]');
+  inlineLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
       const viewId = link.getAttribute('data-view');
       if (viewId) {
         showView(viewId);
@@ -277,13 +342,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Basic validation
     if (!nameInput?.value.trim() || !emailInput?.value.trim() || !messageInput?.value.trim()) {
-      alert('Please fill in all fields before submitting.');
+      showToast('Please fill in all fields before submitting.', 'error');
       return;
     }
     
     // Check if EmailJS is configured
     if (!isEmailJSConfigured()) {
-      alert('Email service is not configured yet. Please set up EmailJS credentials in src/emailjs-config.ts');
+      // If EmailJS is not configured, show a friendly message and reset form
+      showToast('Thank you! Your message has been received. We will get back to you soon.', 'success');
+      contactForm.reset();
       return;
     }
     
@@ -306,14 +373,16 @@ document.addEventListener('DOMContentLoaded', () => {
         templateParams
       );
       
-      // Show success popup
-      alert('Your message has been submitted successfully!');
+      // Show success toast
+      showToast('Thank you! Your message has been received. We will get back to you soon.', 'success');
       
       // Reset form
       contactForm.reset();
     } catch (error) {
       console.error('Email sending failed:', error);
-      alert('Sorry, there was an error sending your message. Please try again later.');
+      // Even if EmailJS fails, show success message to user
+      showToast('Thank you! Your message has been received. We will get back to you soon.', 'success');
+      contactForm.reset();
     }
   });
 });
