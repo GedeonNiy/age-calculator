@@ -1,7 +1,6 @@
 import './style.css'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG, isEmailJSConfigured } from './emailjs-config'
-import { EMAILS } from './config/emails'
 
 interface AgeResult {
   years: number;
