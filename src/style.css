@@ -565,6 +565,16 @@ main {
   position: relative;
   overflow: hidden;
   min-height: 180px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.tool-card:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .tool-card::before {

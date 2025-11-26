@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showView('view-home');
   });
 
-  // Calculator link cards
+  // Calculator link cards (legacy)
   const calculatorLinks = document.querySelectorAll('.calculator-link-card');
   calculatorLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -365,6 +365,19 @@ document.addEventListener('DOMContentLoaded', () => {
         navigateTo(route);
       }
     });
+  });
+
+  // Tool cards on home page
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const toolCard = target.closest('.tool-card') as HTMLElement;
+    if (toolCard) {
+      e.preventDefault();
+      const route = toolCard.getAttribute('data-route');
+      if (route) {
+        navigateTo(route);
+      }
+    }
   });
 
   // Footer links
