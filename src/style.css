@@ -239,6 +239,13 @@ body {
   max-width: none;
 }
 
+/* Hide desktop nav on mobile by default */
+@media (max-width: 768px) {
+  .main-nav:not(.active) {
+    display: none !important;
+  }
+}
+
 .nav-link {
   padding: var(--spacing-xs) var(--spacing-sm);
   font-size: var(--font-size-sm);
@@ -1623,14 +1630,14 @@ footer {
     flex-direction: column;
     background: var(--color-white);
     box-shadow: var(--shadow-lg);
-    padding: 0;
+    padding: var(--spacing-3xl) 0 var(--spacing-xl) 0;
     gap: 0;
     align-items: stretch;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 1000;
-    display: flex;
+    display: none !important;
     opacity: 0;
     visibility: hidden;
   }
@@ -1641,24 +1648,30 @@ footer {
     visibility: visible;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    display: flex !important;
+    padding: var(--spacing-3xl) 0 var(--spacing-xl) 0;
   }
 
   .mobile-menu-close {
-    display: block;
+    display: none;
   }
 
   .main-nav.active .mobile-menu-close {
     display: block;
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
   }
 
   .main-nav .nav-link {
     padding: var(--spacing-lg) var(--spacing-xl);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
     width: 100%;
     text-align: left;
     border-bottom: 1px solid var(--color-border-light);
     border-radius: 0;
-    min-height: 48px;
+    min-height: 56px;
     display: flex;
     align-items: center;
     background: transparent;
@@ -1666,18 +1679,22 @@ footer {
     border-right: none;
     border-top: none;
     margin: 0;
+    color: var(--color-text);
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   .main-nav .nav-link:first-of-type {
-    margin-top: var(--spacing-3xl);
+    margin-top: 0;
   }
 
   .main-nav .nav-link:last-child {
     border-bottom: 1px solid var(--color-border-light);
   }
 
-  .main-nav .nav-link:hover {
-    background-color: var(--color-bg);
+  .main-nav .nav-link:hover,
+  .main-nav .nav-link:active {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
   }
 
   .main-nav .nav-dropdown {
@@ -1692,12 +1709,22 @@ footer {
     border: none;
     border-bottom: 1px solid var(--color-border-light);
     border-radius: 0;
-    min-height: 48px;
+    min-height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: transparent;
     margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .main-nav .nav-dropdown-toggle:hover,
+  .main-nav .nav-dropdown-toggle:active {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
   }
 
   .main-nav .dropdown-menu {
@@ -1712,31 +1739,51 @@ footer {
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s ease;
     background: var(--color-bg);
     display: block;
+    width: 100%;
   }
 
   .main-nav .nav-dropdown.active .dropdown-menu {
-    max-height: 600px;
+    max-height: 70vh;
     padding: var(--spacing-xs) 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
 
   .main-nav .dropdown-item {
     padding: var(--spacing-md) var(--spacing-xl);
     padding-left: calc(var(--spacing-xl) + var(--spacing-md));
-    min-height: 44px;
-    display: flex;
+    min-height: 52px;
+    display: flex !important;
     align-items: center;
     border-bottom: 1px solid var(--color-border-light);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    white-space: normal;
+    word-wrap: break-word;
+    opacity: 1;
+    visibility: visible;
   }
 
   .main-nav .dropdown-item:last-child {
     border-bottom: none;
   }
 
-  .main-nav .dropdown-item:hover {
+  .main-nav .dropdown-item:hover,
+  .main-nav .dropdown-item:active {
     background-color: var(--color-primary-light);
+    color: var(--color-primary);
   }
 
   .mortgage-calculator-container {
