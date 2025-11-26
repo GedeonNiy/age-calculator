@@ -21,15 +21,18 @@
           <div class="logo">
             <h1 class="site-title" data-view="view-home">Smart Tools Hub</h1>
           </div>
-          <button class="mobile-menu-toggle" aria-label="Toggle menu" type="button">
+          <button class="mobile-menu-toggle" aria-label="Open navigation menu" type="button" id="mobile-menu-toggle">
             <span></span>
             <span></span>
             <span></span>
           </button>
-          <nav class="main-nav" id="main-nav">
+          <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+            <button class="mobile-menu-close" aria-label="Close navigation menu" type="button" id="mobile-menu-close">
+              <span>×</span>
+            </button>
             <button type="button" class="nav-link" data-view="view-home">Home</button>
             <div class="nav-dropdown">
-              <button type="button" class="nav-link nav-dropdown-toggle" aria-expanded="false">
+              <button type="button" class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
                 Tools
                 <span class="dropdown-arrow">▼</span>
               </button>
