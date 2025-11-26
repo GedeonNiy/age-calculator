@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://smartagetools.com/</loc></url>
+  <url><loc>https://smartagetools.com/tools</loc></url>
+
+  <!-- Date & Time -->
+  <url><loc>https://smartagetools.com/age-calculator</loc></url>
+  <url><loc>https://smartagetools.com/date-difference</loc></url>
+  <url><loc>https://smartagetools.com/pregnancy-due-date</loc></url>
+
+  <!-- Finance -->
+  <url><loc>https://smartagetools.com/mortgage-calculator</loc></url>
+  <url><loc>https://smartagetools.com/car-loan-calculator</loc></url>
+  <url><loc>https://smartagetools.com/compound-interest</loc></url>
+  <url><loc>https://smartagetools.com/income-tax</loc></url>
+  <url><loc>https://smartagetools.com/currency-converter</loc></url>
+
+  <!-- Health / Education -->
+  <url><loc>https://smartagetools.com/bmi-calculator</loc></url>
+  <url><loc>https://smartagetools.com/gpa-calculator</loc></url>
+
+  <!-- Static pages -->
+  <url><loc>https://smartagetools.com/about</loc></url>
+  <url><loc>https://smartagetools.com/privacy</loc></url>
+  <url><loc>https://smartagetools.com/terms</loc></url>
+  <url><loc>https://smartagetools.com/contact</loc></url>
+</urlset>

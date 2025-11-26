@@ -2,6 +2,8 @@ import './style.css'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG, isEmailJSConfigured } from './emailjs-config'
 import { NAV_ITEMS } from './config/navigation'
+import { updateSEO } from './utils/seo'
+import { SEO_CONFIG } from './config/seo'
 import { initAgeCalculator } from './pages/ageCalculator'
 import { initDateDifferenceCalculator } from './pages/dateDifferenceCalculator'
 import { initMortgageCalculator } from './pages/mortgageCalculator'
@@ -18,16 +20,23 @@ import { initCurrencyConverter } from './pages/currencyConverter'
  */
 const routeToView: Record<string, string> = {
   '/': 'view-home',
+  '/tools': 'view-home', // Tools page is the home page with tools grid
   '/age-calculator': 'view-age-calculator',
   '/mortgage-calculator': 'view-mortgage-calculator',
-  '/date-difference-calculator': 'view-date-difference-calculator',
+  '/date-difference': 'view-date-difference-calculator',
+  '/date-difference-calculator': 'view-date-difference-calculator', // Support both routes
   '/car-loan-calculator': 'view-car-loan-calculator',
   '/bmi-calculator': 'view-bmi-calculator',
   '/gpa-calculator': 'view-gpa-calculator',
   '/pregnancy-due-date': 'view-pregnancy-due-date-calculator',
   '/compound-interest': 'view-compound-interest-calculator',
-  '/income-tax-calculator': 'view-income-tax-calculator',
+  '/income-tax': 'view-income-tax-calculator',
+  '/income-tax-calculator': 'view-income-tax-calculator', // Support both routes
   '/currency-converter': 'view-currency-converter',
+  '/about': 'view-about',
+  '/privacy': 'view-privacy',
+  '/terms': 'view-terms',
+  '/contact': 'view-contact',
 };
 
 /**
@@ -71,9 +80,15 @@ function showView(viewId: string): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Update page title
-  const title = viewToTitle[viewId] || 'Smart Tools Hub';
-  document.title = title;
+  // Update SEO meta tags
+  const seoData = SEO_CONFIG[viewId];
+  if (seoData) {
+    updateSEO(seoData);
+  } else {
+    // Fallback to old title system if no SEO config
+    const title = viewToTitle[viewId] || 'Smart Tools Hub';
+    document.title = title;
+  }
 
   // Update active nav link
   const navLinks = document.querySelectorAll('.nav-link');
@@ -105,8 +120,20 @@ function getCurrentRoute(): string {
  */
 function navigateTo(route: string): void {
   window.history.pushState({}, '', route);
-  const viewId = routeToView[route] || 'view-home';
-  showView(viewId);
+  const viewId = routeToView[route];
+  
+  if (viewId) {
+    showView(viewId);
+  } else {
+    // Handle 404 - show home with noindex SEO
+    updateSEO({
+      title: 'Page Not Found – Smart Tools Hub',
+      description: 'The page you are looking for does not exist. Browse our free calculators instead.',
+      path: route,
+      noindex: true,
+    });
+    showView('view-home');
+  }
 }
 
 /**
