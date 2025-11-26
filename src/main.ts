@@ -282,6 +282,37 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     
+    // Handle dropdown toggle (mobile only)
+    const dropdownToggle = target.closest('.nav-dropdown-toggle') as HTMLElement;
+    if (dropdownToggle && window.innerWidth <= 768) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const navDropdown = dropdownToggle.closest('.nav-dropdown') as HTMLElement;
+      if (navDropdown) {
+        const isActive = navDropdown.classList.contains('active');
+        
+        // Close all other dropdowns first
+        document.querySelectorAll('.nav-dropdown').forEach(dd => {
+          if (dd !== navDropdown) {
+            dd.classList.remove('active');
+            const toggle = dd.querySelector('.nav-dropdown-toggle');
+            toggle?.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        // Toggle current dropdown
+        if (isActive) {
+          navDropdown.classList.remove('active');
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navDropdown.classList.add('active');
+          dropdownToggle.setAttribute('aria-expanded', 'true');
+        }
+      }
+      return;
+    }
+    
     // Handle regular nav links (not dropdown toggles)
     const navLink = target.closest('.nav-link:not(.nav-dropdown-toggle)') as HTMLElement;
     if (navLink && !target.closest('.nav-dropdown-toggle')) {

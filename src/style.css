@@ -1780,11 +1780,17 @@ footer {
     color: var(--color-primary);
   }
 
+  /* Rotate arrow when dropdown is active on mobile */
+  .main-nav.active .nav-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg) !important;
+    transition: transform 0.3s ease !important;
+  }
+
   .main-nav .dropdown-menu {
     position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
     box-shadow: none;
     border: none;
     border-top: 1px solid var(--color-border-light);
@@ -1792,14 +1798,17 @@ footer {
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                transform 0.3s ease,
+                padding 0.4s ease;
     background: var(--color-bg);
     display: block;
     width: 100%;
   }
 
   .main-nav .nav-dropdown.active .dropdown-menu {
-    max-height: 70vh !important;
+    max-height: 600px !important;
     padding: var(--spacing-xs) 0 !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
@@ -1807,11 +1816,12 @@ footer {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   .main-nav .dropdown-item {
     padding: var(--spacing-md) var(--spacing-xl) !important;
-    padding-left: calc(var(--spacing-xl) + var(--spacing-md)) !important;
+    padding-left: calc(var(--spacing-xl) + var(--spacing-md) + var(--spacing-sm)) !important;
     min-height: 52px !important;
     display: flex !important;
     align-items: center !important;
@@ -1830,6 +1840,17 @@ footer {
     word-wrap: break-word !important;
     opacity: 1 !important;
     visibility: visible !important;
+    position: relative;
+  }
+
+  /* Add visual indicator for nested items */
+  .main-nav .dropdown-item::before {
+    content: '→';
+    position: absolute;
+    left: var(--spacing-xl);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    opacity: 0.6;
   }
 
   /* Ensure dropdown items are visible when dropdown is active */
