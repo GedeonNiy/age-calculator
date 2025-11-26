@@ -1,6 +1,7 @@
 import './style.css'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG, isEmailJSConfigured } from './emailjs-config'
+import { NAV_ITEMS } from './config/navigation'
 import { initAgeCalculator } from './pages/ageCalculator'
 import { initDateDifferenceCalculator } from './pages/dateDifferenceCalculator'
 import { initMortgageCalculator } from './pages/mortgageCalculator'
@@ -140,7 +141,74 @@ function showToast(message: string, type: 'success' | 'error' = 'success'): void
   }, 3000);
 }
 
+/**
+ * Render navigation items from configuration
+ */
+function renderNavigation(): void {
+  const mainNav = document.getElementById('main-nav');
+  if (!mainNav) return;
+
+  // Clear existing content (except close button)
+  const closeButton = mainNav.querySelector('.mobile-menu-close');
+  mainNav.innerHTML = '';
+  if (closeButton) {
+    mainNav.appendChild(closeButton);
+  }
+
+  // Render navigation items
+  NAV_ITEMS.forEach((item) => {
+    if (item.type === 'link') {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'nav-link';
+      button.textContent = item.label;
+      if (item.view) {
+        button.setAttribute('data-view', item.view);
+      }
+      if (item.route) {
+        button.setAttribute('data-route', item.route);
+      }
+      mainNav.appendChild(button);
+    } else if (item.type === 'dropdown' && item.children) {
+      const dropdownContainer = document.createElement('div');
+      dropdownContainer.className = 'nav-dropdown';
+
+      const toggleButton = document.createElement('button');
+      toggleButton.type = 'button';
+      toggleButton.className = 'nav-link nav-dropdown-toggle';
+      toggleButton.setAttribute('aria-expanded', 'false');
+      toggleButton.setAttribute('aria-haspopup', 'true');
+      toggleButton.setAttribute('aria-controls', `dropdown-${item.label.toLowerCase()}`);
+      toggleButton.innerHTML = `${item.label} <span class="dropdown-arrow">▼</span>`;
+
+      const dropdownMenu = document.createElement('div');
+      dropdownMenu.className = 'dropdown-menu';
+      dropdownMenu.id = `dropdown-${item.label.toLowerCase()}`;
+      dropdownMenu.setAttribute('role', 'menu');
+
+      item.children.forEach((child) => {
+        const childButton = document.createElement('button');
+        childButton.type = 'button';
+        childButton.className = 'dropdown-item';
+        childButton.setAttribute('role', 'menuitem');
+        childButton.textContent = child.label;
+        if (child.route) {
+          childButton.setAttribute('data-route', child.route);
+        }
+        dropdownMenu.appendChild(childButton);
+      });
+
+      dropdownContainer.appendChild(toggleButton);
+      dropdownContainer.appendChild(dropdownMenu);
+      mainNav.appendChild(dropdownContainer);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Render navigation from configuration
+  renderNavigation();
+
   // Set current year in footer
   const yearElement = document.getElementById('current-year');
   if (yearElement) {
@@ -209,41 +277,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Dropdown toggle for mobile
-  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-  const navDropdown = document.querySelector('.nav-dropdown');
-  
-  dropdownToggle?.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      e.stopPropagation();
-      const isActive = navDropdown?.classList.contains('active');
-      // Close all other dropdowns first
-      document.querySelectorAll('.nav-dropdown').forEach(dd => {
-        if (dd !== navDropdown) {
-          dd.classList.remove('active');
-        }
-      });
-      // Toggle current dropdown
-      if (isActive) {
-        navDropdown?.classList.remove('active');
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        navDropdown?.classList.add('active');
-        dropdownToggle.setAttribute('aria-expanded', 'true');
-      }
-    }
-  });
 
-  // Navigation elements
-  const navLinks = document.querySelectorAll('.nav-link:not(.nav-dropdown-toggle)');
-  
-  // Set up navigation handlers
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+  // Navigation handlers - use event delegation for dynamically rendered items
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    
+    // Handle regular nav links (not dropdown toggles)
+    const navLink = target.closest('.nav-link:not(.nav-dropdown-toggle)') as HTMLElement;
+    if (navLink && !target.closest('.nav-dropdown-toggle')) {
       e.preventDefault();
-      const viewId = link.getAttribute('data-view');
-      const route = link.getAttribute('data-route');
+      const viewId = navLink.getAttribute('data-view');
+      const route = navLink.getAttribute('data-route');
       if (route) {
         navigateTo(route);
       } else if (viewId) {
@@ -252,22 +296,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Close mobile menu after navigation
       closeMobileMenu();
-    });
-  });
+      return;
+    }
 
-  // Dropdown items navigation
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-  dropdownItems.forEach(item => {
-    item.addEventListener('click', (e) => {
+    // Handle dropdown items
+    const dropdownItem = target.closest('.dropdown-item') as HTMLElement;
+    if (dropdownItem) {
       e.preventDefault();
-      const route = item.getAttribute('data-route');
+      const route = dropdownItem.getAttribute('data-route');
       if (route) {
         navigateTo(route);
       }
       // Close mobile menu and dropdown after navigation
       closeMobileMenu();
-      navDropdown?.classList.remove('active');
-    });
+      document.querySelectorAll('.nav-dropdown').forEach(dd => {
+        dd.classList.remove('active');
+        const toggle = dd.querySelector('.nav-dropdown-toggle');
+        toggle?.setAttribute('aria-expanded', 'false');
+      });
+    }
   });
 
   // Logo click handler - navigate to home
