@@ -1,144 +1,54 @@
 import './style.css'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG, isEmailJSConfigured } from './emailjs-config'
-
-interface AgeResult {
-  years: number;
-  months: number;
-  days: number;
-}
-
-interface DateDifferenceResult {
-  days: number;
-  weeks: number;
-  months: number;
-  years: number;
-}
+import { initAgeCalculator } from './pages/ageCalculator'
+import { initDateDifferenceCalculator } from './pages/dateDifferenceCalculator'
+import { initMortgageCalculator } from './pages/mortgageCalculator'
+import { initCarLoanCalculator } from './pages/carLoanCalculator'
+import { initBMICalculator } from './pages/bmiCalculator'
+import { initGPACalculator } from './pages/gpaCalculator'
+import { initPregnancyDueDateCalculator } from './pages/pregnancyDueDateCalculator'
+import { initCompoundInterestCalculator } from './pages/compoundInterestCalculator'
+import { initIncomeTaxCalculator } from './pages/incomeTaxCalculator'
+import { initCurrencyConverter } from './pages/currencyConverter'
 
 /**
- * Calculates age from date of birth to current date
+ * Route to view mapping
  */
-function calculateAge(dob: Date): AgeResult {
-  const today = new Date();
-  let years = today.getFullYear() - dob.getFullYear();
-  let months = today.getMonth() - dob.getMonth();
-  let days = today.getDate() - dob.getDate();
-
-  // Adjust for negative days
-  if (days < 0) {
-    months--;
-    const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-    days += lastMonth.getDate();
-  }
-
-  // Adjust for negative months
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  return { years, months, days };
-}
+const routeToView: Record<string, string> = {
+  '/': 'view-home',
+  '/age-calculator': 'view-age-calculator',
+  '/mortgage-calculator': 'view-mortgage-calculator',
+  '/date-difference-calculator': 'view-date-difference-calculator',
+  '/car-loan-calculator': 'view-car-loan-calculator',
+  '/bmi-calculator': 'view-bmi-calculator',
+  '/gpa-calculator': 'view-gpa-calculator',
+  '/pregnancy-due-date': 'view-pregnancy-due-date-calculator',
+  '/compound-interest': 'view-compound-interest-calculator',
+  '/income-tax-calculator': 'view-income-tax-calculator',
+  '/currency-converter': 'view-currency-converter',
+};
 
 /**
- * Calculates the difference between two dates
+ * View to title mapping
  */
-function calculateDateDifference(start: Date, end: Date): DateDifferenceResult {
-  // Calculate total days difference
-  const timeDiff = end.getTime() - start.getTime();
-  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-  
-  // Calculate years, months, and remaining days
-  let years = end.getFullYear() - start.getFullYear();
-  let months = end.getMonth() - start.getMonth();
-  let remainingDays = end.getDate() - start.getDate();
-
-  // Adjust for negative days
-  if (remainingDays < 0) {
-    months--;
-    const lastMonth = new Date(end.getFullYear(), end.getMonth(), 0);
-    remainingDays += lastMonth.getDate();
-  }
-
-  // Adjust for negative months
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  const weeks = Math.floor(days / 7);
-
-  return { days, weeks, months, years };
-}
-
-/**
- * Formats age result for display
- */
-function formatAgeResult(result: AgeResult): string {
-  const parts: string[] = [];
-  if (result.years > 0) {
-    parts.push(`${result.years} ${result.years === 1 ? 'year' : 'years'}`);
-  }
-  if (result.months > 0) {
-    parts.push(`${result.months} ${result.months === 1 ? 'month' : 'months'}`);
-  }
-  if (result.days > 0 || parts.length === 0) {
-    parts.push(`${result.days} ${result.days === 1 ? 'day' : 'days'}`);
-  }
-  return parts.join(', ');
-}
-
-/**
- * Formats date difference result for display
- */
-function formatDateDifferenceResult(result: DateDifferenceResult): string {
-  const parts: string[] = [];
-  if (result.years > 0) {
-    parts.push(`${result.years} ${result.years === 1 ? 'year' : 'years'}`);
-  }
-  if (result.months > 0) {
-    parts.push(`${result.months} ${result.months === 1 ? 'month' : 'months'}`);
-  }
-  if (result.weeks > 0) {
-    parts.push(`${result.weeks} ${result.weeks === 1 ? 'week' : 'weeks'}`);
-  }
-  if (result.days > 0 || parts.length === 0) {
-    parts.push(`${result.days} ${result.days === 1 ? 'day' : 'days'}`);
-  }
-  return parts.join(', ');
-}
-
-/**
- * Shows an error message below an input element
- */
-function showError(inputId: string, message: string): void {
-  const input = document.getElementById(inputId) as HTMLInputElement;
-  if (!input) return;
-
-  // Remove existing error message
-  const existingError = input.parentElement?.querySelector('.error-message');
-  if (existingError) {
-    existingError.remove();
-  }
-
-  // Add new error message
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'error-message';
-  errorDiv.textContent = message;
-  input.parentElement?.appendChild(errorDiv);
-}
-
-/**
- * Removes error message below an input element
- */
-function clearError(inputId: string): void {
-  const input = document.getElementById(inputId) as HTMLInputElement;
-  if (!input) return;
-  const errorDiv = input.parentElement?.querySelector('.error-message');
-  if (errorDiv) {
-    errorDiv.remove();
-  }
-}
+const viewToTitle: Record<string, string> = {
+  'view-home': 'Smart Tools Hub - Free Age & Date Calculators',
+  'view-age-calculator': 'Age Calculator | Smart Tools Hub',
+  'view-mortgage-calculator': 'Mortgage Calculator | Smart Tools Hub',
+  'view-date-difference-calculator': 'Date Difference Calculator | Smart Tools Hub',
+  'view-car-loan-calculator': 'Car Loan Calculator | Smart Tools Hub',
+  'view-bmi-calculator': 'BMI Calculator | Smart Tools Hub',
+  'view-gpa-calculator': 'GPA Calculator | Smart Tools Hub',
+  'view-pregnancy-due-date-calculator': 'Pregnancy Due Date Calculator | Smart Tools Hub',
+  'view-compound-interest-calculator': 'Compound Interest Calculator | Smart Tools Hub',
+  'view-income-tax-calculator': 'Income Tax Calculator | Smart Tools Hub',
+  'view-currency-converter': 'Currency Converter | Smart Tools Hub',
+  'view-about': 'About | Smart Tools Hub',
+  'view-privacy': 'Privacy Policy | Smart Tools Hub',
+  'view-terms': 'Terms & Conditions | Smart Tools Hub',
+  'view-contact': 'Contact | Smart Tools Hub',
+};
 
 /**
  * Shows a specific view and hides all others
@@ -160,16 +70,42 @@ function showView(viewId: string): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Update page title
+  const title = viewToTitle[viewId] || 'Smart Tools Hub';
+  document.title = title;
+
   // Update active nav link
   const navLinks = document.querySelectorAll('.nav-link');
+  const currentRoute = getCurrentRoute();
   navLinks.forEach(link => {
     const linkView = link.getAttribute('data-view');
-    if (linkView === viewId) {
+    const linkRoute = link.getAttribute('data-route');
+    const isActive = 
+      (linkView === viewId) || 
+      (linkRoute === currentRoute) ||
+      (linkView === 'view-home' && currentRoute === '/');
+    if (isActive) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
     }
   });
+}
+
+/**
+ * Gets the current route from the URL
+ */
+function getCurrentRoute(): string {
+  return window.location.pathname || '/';
+}
+
+/**
+ * Navigates to a route
+ */
+function navigateTo(route: string): void {
+  window.history.pushState({}, '', route);
+  const viewId = routeToView[route] || 'view-home';
+  showView(viewId);
 }
 
 /**
@@ -211,15 +147,94 @@ document.addEventListener('DOMContentLoaded', () => {
     yearElement.textContent = new Date().getFullYear().toString();
   }
 
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    const route = getCurrentRoute();
+    const viewId = routeToView[route] || 'view-home';
+    showView(viewId);
+  });
+
+  // Mobile menu toggle
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const mainNav = document.getElementById('main-nav');
+  
+  mobileMenuToggle?.addEventListener('click', () => {
+    mobileMenuToggle.classList.toggle('active');
+    mainNav?.classList.toggle('active');
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.header-content') && mainNav?.classList.contains('active')) {
+      mobileMenuToggle?.classList.remove('active');
+      mainNav?.classList.remove('active');
+    }
+  });
+
+  // Dropdown toggle for mobile
+  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+  const navDropdown = document.querySelector('.nav-dropdown');
+  
+  dropdownToggle?.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      navDropdown?.classList.toggle('active');
+    }
+  });
+
   // Navigation elements
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link:not(.nav-dropdown-toggle)');
   
   // Set up navigation handlers
   navLinks.forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
       const viewId = link.getAttribute('data-view');
-      if (viewId) {
+      const route = link.getAttribute('data-route');
+      if (route) {
+        navigateTo(route);
+      } else if (viewId) {
+        navigateTo('/');
         showView(viewId);
+      }
+      // Close mobile menu after navigation
+      mobileMenuToggle?.classList.remove('active');
+      mainNav?.classList.remove('active');
+    });
+  });
+
+  // Dropdown items navigation
+  const dropdownItems = document.querySelectorAll('.dropdown-item');
+  dropdownItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const route = item.getAttribute('data-route');
+      if (route) {
+        navigateTo(route);
+      }
+      // Close mobile menu and dropdown after navigation
+      mobileMenuToggle?.classList.remove('active');
+      mainNav?.classList.remove('active');
+      navDropdown?.classList.remove('active');
+    });
+  });
+
+  // Logo click handler - navigate to home
+  const siteTitle = document.querySelector('.site-title[data-view]');
+  siteTitle?.addEventListener('click', () => {
+    navigateTo('/');
+    showView('view-home');
+  });
+
+  // Calculator link cards
+  const calculatorLinks = document.querySelectorAll('.calculator-link-card');
+  calculatorLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const route = link.getAttribute('data-route') || link.getAttribute('href');
+      if (route) {
+        navigateTo(route);
       }
     });
   });
@@ -230,7 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const viewId = link.getAttribute('data-view');
-      if (viewId) {
+      const route = link.getAttribute('data-route');
+      if (route) {
+        navigateTo(route);
+      } else if (viewId) {
+        navigateTo('/');
         showView(viewId);
       }
     });
@@ -248,86 +267,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Initialize: show home view
-  showView('view-home');
+  // Initialize based on current route
+  const currentRoute = getCurrentRoute();
+  const initialViewId = routeToView[currentRoute] || 'view-home';
+  showView(initialViewId);
 
-  // Age Calculator elements
-  const dobInput = document.getElementById('dob-input') as HTMLInputElement;
-  const ageButton = document.getElementById('calculate-age-btn') as HTMLButtonElement;
-  const ageResult = document.getElementById('age-result') as HTMLDivElement;
-
-  // Date Difference Calculator elements
-  const startDateInput = document.getElementById('start-date-input') as HTMLInputElement;
-  const endDateInput = document.getElementById('end-date-input') as HTMLInputElement;
-  const differenceButton = document.getElementById('calculate-difference-btn') as HTMLButtonElement;
-  const differenceResult = document.getElementById('difference-result') as HTMLDivElement;
-
-  // Age Calculator handler
-  ageButton?.addEventListener('click', () => {
-    clearError('dob-input');
-    
-    if (!dobInput?.value) {
-      showError('dob-input', 'Please select a date of birth');
-      return;
-    }
-
-    const dob = new Date(dobInput.value);
-    const today = new Date();
-    
-    if (dob > today) {
-      showError('dob-input', 'Date of birth cannot be in the future');
-      return;
-    }
-
-    try {
-      const result = calculateAge(dob);
-      if (ageResult) {
-        ageResult.textContent = formatAgeResult(result);
-        ageResult.className = 'result success';
-      }
-    } catch (error) {
-      showError('dob-input', 'Invalid date. Please try again.');
-    }
-  });
-
-  // Date Difference Calculator handler
-  differenceButton?.addEventListener('click', () => {
-    clearError('start-date-input');
-    clearError('end-date-input');
-
-    if (!startDateInput?.value) {
-      showError('start-date-input', 'Please select a start date');
-      return;
-    }
-
-    if (!endDateInput?.value) {
-      showError('end-date-input', 'Please select an end date');
-      return;
-    }
-
-    const startDate = new Date(startDateInput.value);
-    const endDate = new Date(endDateInput.value);
-
-    if (endDate < startDate) {
-      showError('end-date-input', 'End date cannot be before start date');
-      return;
-    }
-
-    try {
-      const result = calculateDateDifference(startDate, endDate);
-      if (differenceResult) {
-        differenceResult.textContent = formatDateDifferenceResult(result);
-        differenceResult.className = 'result success';
-      }
-    } catch (error) {
-      showError('end-date-input', 'Invalid dates. Please try again.');
-    }
-  });
-
-  // Clear errors when inputs change
-  dobInput?.addEventListener('input', () => clearError('dob-input'));
-  startDateInput?.addEventListener('input', () => clearError('start-date-input'));
-  endDateInput?.addEventListener('input', () => clearError('end-date-input'));
+  // Initialize calculator pages
+  initAgeCalculator();
+  initDateDifferenceCalculator();
+  initMortgageCalculator();
+  initCarLoanCalculator();
+  initBMICalculator();
+  initGPACalculator();
+  initPregnancyDueDateCalculator();
+  initCompoundInterestCalculator();
+  initIncomeTaxCalculator();
+  initCurrencyConverter();
 
   // Contact form handler with EmailJS
   const contactForm = document.getElementById('contact-form') as HTMLFormElement;

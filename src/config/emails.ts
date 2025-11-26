@@ -1,5 +1,5 @@
 /**
- * Centralized email addresses for Smart Age Tools
+ * Centralized email addresses for Smart Tools Hub
  * All email addresses used throughout the application should reference this config
  */
 export const EMAILS = {
@@ -7,4 +7,5 @@ export const EMAILS = {
   info: "info@smartagetools.com",
   contact: "contact@smartagetools.com",
 } as const;
+
 

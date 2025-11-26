@@ -19,10 +19,33 @@
       <header class="site-header">
         <div class="header-content">
           <div class="logo">
-            <h1 class="site-title">Smart Age & Date Tools</h1>
+            <h1 class="site-title" data-view="view-home">Smart Tools Hub</h1>
           </div>
-          <nav class="main-nav">
+          <button class="mobile-menu-toggle" aria-label="Toggle menu" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="main-nav" id="main-nav">
             <button type="button" class="nav-link" data-view="view-home">Home</button>
+            <div class="nav-dropdown">
+              <button type="button" class="nav-link nav-dropdown-toggle" aria-expanded="false">
+                Tools
+                <span class="dropdown-arrow">▼</span>
+              </button>
+              <div class="dropdown-menu">
+                <button type="button" class="dropdown-item" data-route="/age-calculator">Age Calculator</button>
+                <button type="button" class="dropdown-item" data-route="/date-difference-calculator">Date Difference</button>
+                <button type="button" class="dropdown-item" data-route="/mortgage-calculator">Mortgage Calculator</button>
+                <button type="button" class="dropdown-item" data-route="/car-loan-calculator">Car Loan Calculator</button>
+                <button type="button" class="dropdown-item" data-route="/bmi-calculator">BMI Calculator</button>
+                <button type="button" class="dropdown-item" data-route="/gpa-calculator">GPA Calculator</button>
+                <button type="button" class="dropdown-item" data-route="/pregnancy-due-date">Pregnancy Due Date</button>
+                <button type="button" class="dropdown-item" data-route="/compound-interest">Compound Interest</button>
+                <button type="button" class="dropdown-item" data-route="/income-tax-calculator">Income Tax</button>
+                <button type="button" class="dropdown-item" data-route="/currency-converter">Currency Converter</button>
+              </div>
+            </div>
             <button type="button" class="nav-link" data-view="view-about">About</button>
             <button type="button" class="nav-link" data-view="view-privacy">Privacy</button>
             <button type="button" class="nav-link" data-view="view-terms">Terms</button>
@@ -36,40 +59,121 @@
         <main>
           <!-- Hero Section -->
           <div class="hero-section">
-            <div class="hero-badge">No Sign-In Required</div>
-            <h1 class="hero-title">Free Age & Date Calculators</h1>
-            <p class="hero-subtitle">The best free online calculators for ages and dates</p>
-            <p class="hero-description">
-              Calculate your exact age or find the precise difference between any two dates instantly.
-            </p>
+            <div class="hero-badge">✨ Free • No Sign-In Required • Instant Results</div>
+            <h1 class="hero-title">Smart Tools Hub</h1>
+            <p class="hero-subtitle">Your comprehensive online calculator center. Access 10+ free tools for dates, finance, health, education, and more.</p>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Free Tools</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free Forever</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Sign-Up Required</div>
+              </div>
+            </div>
           </div>
 
-          <div class="calculators-container">
-            <!-- Age Calculator Section -->
-            <section class="calculator-card">
-              <h2>Age Calculator</h2>
-              <div class="form-group">
-                <label for="dob-input">Date of birth</label>
-                <input type="date" id="dob-input" name="dob" />
-              </div>
-              <button type="button" id="calculate-age-btn">Calculate Age</button>
-              <div id="age-result" class="result"></div>
-            </section>
+          <!-- Tools Grid Section -->
+          <div class="tools-section">
+            <div class="section-header">
+              <h2>All Tools</h2>
+              <p>Choose from our collection of free online calculators</p>
+            </div>
 
-            <!-- Date Difference Calculator Section -->
-            <section class="calculator-card">
-              <h2>Date Difference Calculator</h2>
-              <div class="form-group">
-                <label for="start-date-input">Start date</label>
-                <input type="date" id="start-date-input" name="start-date" />
+            <div class="tools-grid">
+              <!-- Date & Time Tools -->
+              <div class="tool-category">
+                <h3 class="category-title">📅 Date & Time</h3>
+                <div class="tools-in-category">
+                  <a href="/age-calculator" class="tool-card" data-route="/age-calculator">
+                    <div class="tool-icon">🎂</div>
+                    <h4>Age Calculator</h4>
+                    <p>Calculate your exact age in years, months, and days</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/date-difference-calculator" class="tool-card" data-route="/date-difference-calculator">
+                    <div class="tool-icon">📊</div>
+                    <h4>Date Difference</h4>
+                    <p>Find the difference between any two dates</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/pregnancy-due-date" class="tool-card" data-route="/pregnancy-due-date">
+                    <div class="tool-icon">👶</div>
+                    <h4>Pregnancy Due Date</h4>
+                    <p>Estimate your due date and track pregnancy progress</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="end-date-input">End date</label>
-                <input type="date" id="end-date-input" name="end-date" />
+
+              <!-- Financial Tools -->
+              <div class="tool-category">
+                <h3 class="category-title">💰 Finance & Loans</h3>
+                <div class="tools-in-category">
+                  <a href="/mortgage-calculator" class="tool-card" data-route="/mortgage-calculator">
+                    <div class="tool-icon">🏠</div>
+                    <h4>Mortgage Calculator</h4>
+                    <p>Calculate monthly payments and amortization schedule</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/car-loan-calculator" class="tool-card" data-route="/car-loan-calculator">
+                    <div class="tool-icon">🚗</div>
+                    <h4>Car Loan Calculator</h4>
+                    <p>Estimate your auto loan payments and interest</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/compound-interest" class="tool-card" data-route="/compound-interest">
+                    <div class="tool-icon">📈</div>
+                    <h4>Compound Interest</h4>
+                    <p>Calculate investment growth with compound interest</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/income-tax-calculator" class="tool-card" data-route="/income-tax-calculator">
+                    <div class="tool-icon">💵</div>
+                    <h4>Income Tax Calculator</h4>
+                    <p>Estimate your tax liability and effective tax rate</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/currency-converter" class="tool-card" data-route="/currency-converter">
+                    <div class="tool-icon">💱</div>
+                    <h4>Currency Converter</h4>
+                    <p>Convert between major world currencies with live rates</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+                </div>
               </div>
-              <button type="button" id="calculate-difference-btn">Calculate Difference</button>
-              <div id="difference-result" class="result"></div>
-            </section>
+
+              <!-- Health & Education Tools -->
+              <div class="tool-category">
+                <h3 class="category-title">🏥 Health & Education</h3>
+                <div class="tools-in-category">
+                  <a href="/bmi-calculator" class="tool-card" data-route="/bmi-calculator">
+                    <div class="tool-icon">⚖️</div>
+                    <h4>BMI Calculator</h4>
+                    <p>Calculate your Body Mass Index and weight category</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+
+                  <a href="/gpa-calculator" class="tool-card" data-route="/gpa-calculator">
+                    <div class="tool-icon">🎓</div>
+                    <h4>GPA Calculator</h4>
+                    <p>Calculate your Grade Point Average from course grades</p>
+                    <span class="tool-arrow">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- HomePage_Responsive_Top -->
@@ -119,12 +223,811 @@
         </main>
       </section>
 
+      <!-- Age Calculator View -->
+      <section id="view-age-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Age Calculator</h1>
+            <p class="page-description">Calculate your exact age in years, months, and days from your date of birth to today.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <div class="form-group">
+                <label for="age-dob-input">Date of birth</label>
+                <input type="date" id="age-dob-input" name="dob" />
+              </div>
+              <button type="button" id="age-calculate-btn">Calculate Age</button>
+              <div id="age-page-result" class="result"></div>
+            </section>
+          </div>
+          <section class="content-section">
+            <h2>How to Use the Age Calculator</h2>
+            <p>
+              Simply enter your date of birth in the field above and click "Calculate Age". The calculator will instantly show you your exact age in years, months, and days from that date to today. The calculation accounts for leap years and varying month lengths to ensure accuracy.
+            </p>
+            <h3>What is an Age Calculator?</h3>
+            <p>
+              An age calculator is a useful tool that helps you determine your exact age or the age of someone else based on their date of birth. It calculates the precise number of years, months, and days that have passed since the birth date. This tool is particularly helpful for various purposes such as verifying age for legal requirements, planning events, tracking milestones, or simply satisfying curiosity about how old you are down to the exact day.
+            </p>
+            <h3>How accurate is this calculator?</h3>
+            <p>
+              Our age calculator uses precise date arithmetic that accounts for leap years, varying month lengths (28-31 days), and all calendar complexities. The results are accurate to the day, making it suitable for both personal and professional use.
+            </p>
+            <h3>Can I calculate age for dates in the future?</h3>
+            <p>
+              The age calculator is designed to calculate age from a date of birth to the current date. If you enter a future date of birth, the calculator will show an error message, as age cannot be calculated for dates that haven't occurred yet.
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- Mortgage Calculator View -->
+      <section id="view-mortgage-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Mortgage Calculator</h1>
+            <p class="page-description">
+              Calculate your monthly mortgage payment, total interest, and see how extra payments can save you money.
+            </p>
+          </div>
+          <div class="mortgage-calculator-container">
+            <div class="mortgage-inputs-section">
+              <h2>Mortgage Details</h2>
+              <form id="mortgage-form" class="mortgage-form">
+                <div class="form-group">
+                  <label for="mortgage-home-price">Home Price</label>
+                  <input type="number" id="mortgage-home-price" value="350000" min="0" step="1000" />
+                </div>
+
+                <div class="form-group">
+                  <label>Down Payment</label>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" id="down-payment-amount" name="down-payment-type" value="amount" />
+                      Fixed Amount
+                    </label>
+                    <label>
+                      <input type="radio" id="down-payment-percent" name="down-payment-type" value="percentage" checked />
+                      Percentage
+                    </label>
+                  </div>
+                  <input type="number" id="mortgage-down-amount" value="70000" min="0" step="1000" style="display: none;" />
+                  <input type="number" id="mortgage-down-percent" value="20" min="0" max="100" step="0.1" />
+                </div>
+
+                <div class="form-group">
+                  <label for="mortgage-loan-term">Loan Term (Years)</label>
+                  <select id="mortgage-loan-term">
+                    <option value="10">10 years</option>
+                    <option value="15">15 years</option>
+                    <option value="20">20 years</option>
+                    <option value="25">25 years</option>
+                    <option value="30" selected>30 years</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="mortgage-interest-rate">Annual Interest Rate (APR %)</label>
+                  <input type="number" id="mortgage-interest-rate" value="6.5" min="0" max="30" step="0.01" />
+                </div>
+
+                <div class="form-group">
+                  <label>Property Tax (Annual)</label>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" id="property-tax-percent" name="property-tax-type" value="percent" checked />
+                      Percent of Home Price
+                    </label>
+                    <label>
+                      <input type="radio" id="property-tax-amount" name="property-tax-type" value="amount" />
+                      Fixed Amount
+                    </label>
+                  </div>
+                  <input type="number" id="mortgage-tax-percent" value="1.2" min="0" step="0.1" />
+                  <input type="number" id="mortgage-tax-amount" value="4200" min="0" step="100" style="display: none;" />
+                </div>
+
+                <div class="form-group">
+                  <label for="mortgage-insurance">Homeowner's Insurance (Annual)</label>
+                  <input type="number" id="mortgage-insurance" value="1200" min="0" step="100" />
+                </div>
+
+                <div class="form-group">
+                  <label>
+                    <input type="checkbox" id="mortgage-include-pmi" checked />
+                    Include PMI (Private Mortgage Insurance)
+                  </label>
+                  <input type="number" id="mortgage-pmi-percent" value="0.5" min="0" step="0.1" placeholder="PMI % per year" />
+                  <small>PMI applies when down payment is less than 20%</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="mortgage-hoa">HOA Fees (Monthly)</label>
+                  <input type="number" id="mortgage-hoa" value="0" min="0" step="10" />
+                </div>
+
+                <div class="form-group">
+                  <label for="mortgage-extra-payment">Extra Principal Payment (Monthly)</label>
+                  <input type="number" id="mortgage-extra-payment" value="0" min="0" step="50" />
+                  <small>Additional amount paid toward principal each month</small>
+                </div>
+
+                <button type="button" id="mortgage-calculate-btn">Calculate Mortgage</button>
+              </form>
+            </div>
+
+            <div class="mortgage-results-section">
+              <h2>Results</h2>
+              <div class="results-cards">
+                <div class="result-card">
+                  <h3>Monthly P&I Payment</h3>
+                  <p class="result-value" id="mortgage-result-monthly-pi">$0.00</p>
+                  <small>Principal + Interest only</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Monthly Payment</h3>
+                  <p class="result-value" id="mortgage-result-total-monthly">$0.00</p>
+                  <small>Including taxes, insurance, PMI, and HOA</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Interest</h3>
+                  <p class="result-value" id="mortgage-result-total-interest">$0.00</p>
+                  <small>Over loan term</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Cost</h3>
+                  <p class="result-value" id="mortgage-result-total-cost">$0.00</p>
+                  <small>Principal + Interest</small>
+                </div>
+              </div>
+
+              <div id="mortgage-extra-results" class="extra-payment-results" style="display: none;"></div>
+              <div id="mortgage-schedule-container" class="schedule-container"></div>
+            </div>
+          </div>
+        </main>
+      </section>
+
+      <!-- Car Loan Calculator View -->
+      <section id="view-car-loan-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Car Loan Calculator</h1>
+            <p class="page-description">
+              Estimate your monthly car payment, total interest, and payoff details based on vehicle price, loan term, and interest rate.
+            </p>
+          </div>
+          <div class="mortgage-calculator-container">
+            <div class="mortgage-inputs-section">
+              <h2>Loan Details</h2>
+              <form id="car-loan-form" class="mortgage-form">
+                <div class="form-group">
+                  <label for="car-vehicle-price">Vehicle Price</label>
+                  <input type="number" id="car-vehicle-price" value="30000" min="0" step="100" />
+                </div>
+
+                <div class="form-group">
+                  <label for="car-down-payment">Down Payment</label>
+                  <input type="number" id="car-down-payment" value="0" min="0" step="100" />
+                </div>
+
+                <div class="form-group">
+                  <label for="car-trade-in">Trade-In Value</label>
+                  <input type="number" id="car-trade-in" value="0" min="0" step="100" />
+                </div>
+
+                <div class="form-group">
+                  <label for="car-sales-tax">Sales Tax (%)</label>
+                  <input type="number" id="car-sales-tax" value="8.5" min="0" max="20" step="0.1" />
+                </div>
+
+                <div class="form-group">
+                  <label for="car-loan-term">Loan Term (Years)</label>
+                  <select id="car-loan-term">
+                    <option value="2">2 years</option>
+                    <option value="3">3 years</option>
+                    <option value="4">4 years</option>
+                    <option value="5" selected>5 years</option>
+                    <option value="6">6 years</option>
+                    <option value="7">7 years</option>
+                    <option value="8">8 years</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="car-interest-rate">Interest Rate (APR %)</label>
+                  <input type="number" id="car-interest-rate" value="6.5" min="0" max="30" step="0.01" />
+                </div>
+
+                <div class="form-group">
+                  <label for="car-start-date">Start Date</label>
+                  <input type="date" id="car-start-date" />
+                </div>
+
+                <div class="form-group">
+                  <label for="car-extra-payment">Extra Monthly Payment</label>
+                  <input type="number" id="car-extra-payment" value="0" min="0" step="50" />
+                  <small>Additional amount paid toward principal each month</small>
+                </div>
+
+                <button type="button" id="car-calculate-btn">Calculate</button>
+              </form>
+            </div>
+
+            <div class="mortgage-results-section">
+              <h2>Results</h2>
+              <div class="results-cards">
+                <div class="result-card">
+                  <h3>Loan Amount</h3>
+                  <p class="result-value" id="car-result-loan-amount">$0.00</p>
+                  <small>Total amount financed</small>
+                </div>
+                <div class="result-card">
+                  <h3>Monthly Payment</h3>
+                  <p class="result-value" id="car-result-monthly-payment">$0.00</p>
+                  <small>Including extra payments</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Interest</h3>
+                  <p class="result-value" id="car-result-total-interest">$0.00</p>
+                  <small>Over loan term</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Paid</h3>
+                  <p class="result-value" id="car-result-total-paid">$0.00</p>
+                  <small>Principal + Interest</small>
+                </div>
+              </div>
+
+              <div class="result-card" style="margin-top: var(--spacing-lg);">
+                <h3>Estimated Payoff Date</h3>
+                <p class="result-value" id="car-result-payoff-date" style="font-size: var(--font-size-lg);">-</p>
+              </div>
+
+              <div id="car-schedule-container" class="schedule-container"></div>
+            </div>
+          </div>
+        </main>
+      </section>
+
+      <!-- BMI Calculator View -->
+      <section id="view-bmi-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>BMI Calculator</h1>
+            <p class="page-description">
+              Calculate your Body Mass Index and see your weight category based on your height and weight.
+            </p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <h2>Calculate Your BMI</h2>
+              <form id="bmi-form" class="calculator-form">
+                <div class="form-group">
+                  <label>Unit System</label>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" id="bmi-unit-metric" name="bmi-unit" value="metric" checked />
+                      Metric (kg / cm)
+                    </label>
+                    <label>
+                      <input type="radio" id="bmi-unit-imperial" name="bmi-unit" value="imperial" />
+                      Imperial (lb / ft + in)
+                    </label>
+                  </div>
+                </div>
+
+                <div id="bmi-metric-inputs">
+                  <div class="form-group">
+                    <label for="bmi-weight">Weight (kg)</label>
+                    <input type="number" id="bmi-weight" placeholder="Enter weight in kilograms" min="0" step="0.1" />
+                  </div>
+                  <div class="form-group">
+                    <label for="bmi-height-cm">Height (cm)</label>
+                    <input type="number" id="bmi-height-cm" placeholder="Enter height in centimeters" min="0" step="0.1" />
+                  </div>
+                </div>
+
+                <div id="bmi-imperial-inputs" style="display: none;">
+                  <div class="form-group">
+                    <label for="bmi-weight-imperial">Weight (lb)</label>
+                    <input type="number" id="bmi-weight-imperial" placeholder="Enter weight in pounds" min="0" step="0.1" />
+                  </div>
+                  <div class="form-group">
+                    <label>Height</label>
+                    <div style="display: flex; gap: var(--spacing-sm);">
+                      <div style="flex: 1;">
+                        <input type="number" id="bmi-height-feet" placeholder="Feet" min="0" max="10" step="1" />
+                        <small style="display: block; margin-top: var(--spacing-xs); color: var(--color-text-muted);">ft</small>
+                      </div>
+                      <div style="flex: 1;">
+                        <input type="number" id="bmi-height-inches" placeholder="Inches" min="0" max="11" step="1" />
+                        <small style="display: block; margin-top: var(--spacing-xs); color: var(--color-text-muted);">in</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" id="bmi-calculate-btn">Calculate BMI</button>
+                <div id="bmi-page-result" class="result"></div>
+              </form>
+            </section>
+          </div>
+          <section class="content-section">
+            <div id="bmi-results-section" style="display: none; margin-top: var(--spacing-xl);">
+              <div class="calculator-card" style="text-align: center; padding: var(--spacing-xl);">
+                <h2 style="margin-bottom: var(--spacing-md);">Your BMI Result</h2>
+                <div style="font-size: 3rem; font-weight: var(--font-weight-bold); color: var(--color-primary); margin-bottom: var(--spacing-sm);">
+                  <span id="bmi-result-value">-</span>
+                </div>
+                <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold); margin-bottom: var(--spacing-xs);">
+                  <span id="bmi-result-category">-</span>
+                </div>
+                <p style="color: var(--color-text-secondary); margin: 0;">
+                  <span id="bmi-result-description">-</span>
+                </p>
+              </div>
+            </div>
+            <h2>What is BMI?</h2>
+            <p>
+              Body Mass Index (BMI) is a measure of body fat based on height and weight. It's a simple calculation that helps assess whether a person has a healthy body weight for their height.
+            </p>
+            <h3>BMI Categories</h3>
+            <ul class="feature-list">
+              <li><strong>Underweight:</strong> BMI less than 18.5</li>
+              <li><strong>Normal weight:</strong> BMI between 18.5 and 24.9</li>
+              <li><strong>Overweight:</strong> BMI between 25 and 29.9</li>
+              <li><strong>Obesity:</strong> BMI of 30 or greater</li>
+            </ul>
+            <h3>Limitations of BMI</h3>
+            <p>
+              While BMI is a useful screening tool, it doesn't directly measure body fat. It may not accurately reflect body composition for athletes, older adults, or individuals with high muscle mass. Always consult with a healthcare professional for a comprehensive health assessment.
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- GPA Calculator View -->
+      <section id="view-gpa-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>GPA Calculator</h1>
+            <p class="page-description">
+              Calculate your semester GPA based on course grades and credits. Add multiple courses and see your overall grade point average.
+            </p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <h2>Calculate Your GPA</h2>
+              <form id="gpa-form" class="calculator-form">
+                <div class="gpa-courses-wrapper">
+                  <div class="gpa-courses-header">
+                    <div class="gpa-course-name">Course Name</div>
+                    <div class="gpa-course-credits">Credits</div>
+                    <div class="gpa-course-grade">Grade</div>
+                    <div class="gpa-course-actions">Action</div>
+                  </div>
+                  <div id="gpa-courses-container" class="gpa-courses-container"></div>
+                </div>
+                <div class="gpa-actions">
+                  <button type="button" id="gpa-add-course-btn">Add Course</button>
+                  <button type="button" id="gpa-calculate-btn">Calculate GPA</button>
+                </div>
+                <div id="gpa-result" class="result"></div>
+              </form>
+            </section>
+          </div>
+          <section class="content-section">
+            <h2>How to Use the GPA Calculator</h2>
+            <p>
+              Enter your courses by adding course names (optional), credits, and grades. Click "Add Course" to add more courses, and "Remove" to delete a course. Once you've entered all your courses, click "Calculate GPA" to see your grade point average.
+            </p>
+            <h3>GPA Scale</h3>
+            <p>
+              This calculator uses a standard 4.0 scale:
+            </p>
+            <ul class="feature-list">
+              <li><strong>A:</strong> 4.0</li>
+              <li><strong>A-:</strong> 3.7</li>
+              <li><strong>B+:</strong> 3.3</li>
+              <li><strong>B:</strong> 3.0</li>
+              <li><strong>B-:</strong> 2.7</li>
+              <li><strong>C+:</strong> 2.3</li>
+              <li><strong>C:</strong> 2.0</li>
+              <li><strong>C-:</strong> 1.7</li>
+              <li><strong>D:</strong> 1.0</li>
+              <li><strong>F:</strong> 0.0</li>
+            </ul>
+            <h3>How GPA is Calculated</h3>
+            <p>
+              GPA is calculated by multiplying each course's grade points by its credit hours, summing all quality points, and dividing by the total credit hours. This gives you a weighted average that reflects both your grades and the credit value of each course.
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- Pregnancy Due Date Calculator View -->
+      <section id="view-pregnancy-due-date-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Pregnancy Due Date Calculator</h1>
+            <p class="page-description">
+              Estimate your pregnancy due date based on your last menstrual period (LMP). This calculator provides an approximate due date and tracks your pregnancy progress.
+            </p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <h2>Calculate Your Due Date</h2>
+              <form id="pregnancy-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="pregnancy-lmp">Last Menstrual Period (LMP)</label>
+                  <input type="date" id="pregnancy-lmp" name="lmp" />
+                  <small style="display: block; margin-top: var(--spacing-xs); color: var(--color-text-muted);">
+                    Enter the first day of your last menstrual period
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label for="pregnancy-cycle-length">Average Cycle Length (days)</label>
+                  <input type="number" id="pregnancy-cycle-length" value="28" min="21" max="35" step="1" />
+                  <small style="display: block; margin-top: var(--spacing-xs); color: var(--color-text-muted);">
+                    Typical cycle length is 28 days. Adjust if your cycle is different.
+                  </small>
+                </div>
+
+                <button type="button" id="pregnancy-calculate-btn">Calculate Due Date</button>
+                <div id="pregnancy-page-result" class="result" style="margin-top: var(--spacing-md);"></div>
+              </form>
+            </section>
+          </div>
+          <section class="content-section">
+            <div id="pregnancy-results-section" style="display: none; margin-top: var(--spacing-xl);">
+              <div class="calculator-card">
+                <h2>Your Pregnancy Information</h2>
+                <div class="pregnancy-results-grid">
+                  <div class="pregnancy-result-item">
+                    <h3>Estimated Due Date</h3>
+                    <p class="pregnancy-result-value" id="pregnancy-result-due-date">-</p>
+                  </div>
+                  <div class="pregnancy-result-item">
+                    <h3>Gestational Age</h3>
+                    <p class="pregnancy-result-value" id="pregnancy-result-gestational-age">-</p>
+                  </div>
+                  <div class="pregnancy-result-item">
+                    <h3>Current Trimester</h3>
+                    <p class="pregnancy-result-value" id="pregnancy-result-trimester">-</p>
+                  </div>
+                  <div class="pregnancy-result-item">
+                    <h3>Second Trimester Starts</h3>
+                    <p class="pregnancy-result-value" id="pregnancy-result-second-trimester">-</p>
+                    <small>Week 13</small>
+                  </div>
+                  <div class="pregnancy-result-item">
+                    <h3>Third Trimester Starts</h3>
+                    <p class="pregnancy-result-value" id="pregnancy-result-third-trimester">-</p>
+                    <small>Week 28</small>
+                  </div>
+                </div>
+                <div id="pregnancy-result-disclaimer" class="pregnancy-disclaimer" style="display: none;">
+                  <p>
+                    <strong>Important:</strong> This calculator provides an estimate only. Actual due dates may vary. 
+                    Always consult with your healthcare provider for accurate pregnancy dating and medical advice.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <h2>How to Use the Pregnancy Due Date Calculator</h2>
+            <p>
+              Enter the first day of your last menstrual period (LMP) and your average cycle length. The calculator will estimate your due date, which is typically 40 weeks (280 days) from your LMP, adjusted for your cycle length.
+            </p>
+            <h3>Understanding Your Results</h3>
+            <ul class="feature-list">
+              <li><strong>Estimated Due Date:</strong> The approximate date your baby is due, calculated as LMP + 280 days (adjusted for cycle length).</li>
+              <li><strong>Gestational Age:</strong> How many weeks and days pregnant you are based on today's date.</li>
+              <li><strong>Trimesters:</strong> Pregnancy is divided into three trimesters, each lasting approximately 13 weeks.</li>
+            </ul>
+            <h3>Important Notes</h3>
+            <p>
+              This calculator provides estimates only. Your healthcare provider may use ultrasound measurements or other methods to determine a more accurate due date. Always follow the guidance of your medical professional for pregnancy care and dating.
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- Compound Interest Calculator View -->
+      <section id="view-compound-interest-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Compound Interest Calculator</h1>
+            <p class="page-description">
+              Estimate how your investments grow over time with compound interest. Calculate the future value of your savings with regular contributions.
+            </p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <h2>Calculate Your Investment Growth</h2>
+              <form id="compound-interest-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="compound-principal">Initial Investment / Principal</label>
+                  <input type="number" id="compound-principal" value="1000" min="0" step="100" placeholder="Enter initial amount" />
+                </div>
+
+                <div class="form-group">
+                  <label for="compound-monthly-contribution">Monthly Contribution</label>
+                  <input type="number" id="compound-monthly-contribution" value="0" min="0" step="50" placeholder="Enter monthly contribution (optional)" />
+                  <small style="display: block; margin-top: var(--spacing-xs); color: var(--color-text-muted);">
+                    Amount you plan to add each month (can be $0)
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label for="compound-interest-rate">Annual Interest Rate (%)</label>
+                  <input type="number" id="compound-interest-rate" value="5" min="0" max="100" step="0.1" placeholder="Enter annual interest rate" />
+                </div>
+
+                <div class="form-group">
+                  <label for="compound-years">Investment Duration (Years)</label>
+                  <input type="number" id="compound-years" value="10" min="1" max="100" step="1" placeholder="Enter number of years" />
+                </div>
+
+                <div class="form-group">
+                  <label for="compound-frequency">Compounding Frequency</label>
+                  <select id="compound-frequency">
+                    <option value="yearly">Yearly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="monthly" selected>Monthly</option>
+                    <option value="daily">Daily</option>
+                  </select>
+                  <small style="display: block; margin-top: var(--spacing-xs); color: var(--color-text-muted);">
+                    How often interest is compounded
+                  </small>
+                </div>
+
+                <button type="button" id="compound-calculate-btn">Calculate Growth</button>
+                <div id="compound-page-result" class="result"></div>
+              </form>
+            </section>
+          </div>
+          <section class="content-section">
+            <div id="compound-results-section" style="display: none; margin-top: var(--spacing-xl);">
+              <div class="calculator-card">
+                <h2>Investment Summary</h2>
+                <div class="results-cards">
+                  <div class="result-card">
+                    <h3>Final Balance</h3>
+                    <p class="result-value" id="compound-result-final-balance">$0.00</p>
+                    <small>Total value at end of period</small>
+                  </div>
+                  <div class="result-card">
+                    <h3>Total Contributions</h3>
+                    <p class="result-value" id="compound-result-total-contributions">$0.00</p>
+                    <small>Principal + all contributions</small>
+                  </div>
+                  <div class="result-card">
+                    <h3>Total Interest Earned</h3>
+                    <p class="result-value" id="compound-result-total-interest">$0.00</p>
+                    <small>Interest earned over time</small>
+                  </div>
+                </div>
+                <div id="compound-breakdown-container" class="schedule-container"></div>
+              </div>
+            </div>
+            <h2>How Compound Interest Works</h2>
+            <p>
+              Compound interest is the interest calculated on the initial principal and also on the accumulated interest from previous periods. This means your money grows faster over time because you earn interest on both your original investment and the interest it has already earned.
+            </p>
+            <h3>Key Factors</h3>
+            <ul class="feature-list">
+              <li><strong>Principal:</strong> Your initial investment amount.</li>
+              <li><strong>Monthly Contributions:</strong> Regular additions to your investment increase growth potential.</li>
+              <li><strong>Interest Rate:</strong> The annual percentage rate your investment earns.</li>
+              <li><strong>Compounding Frequency:</strong> How often interest is calculated and added to your balance (daily, monthly, quarterly, or yearly). More frequent compounding generally leads to higher returns.</li>
+              <li><strong>Time:</strong> The longer your investment period, the more time compound interest has to work.</li>
+            </ul>
+            <h3>Example</h3>
+            <p>
+              If you invest $1,000 at 5% annual interest compounded monthly for 10 years, you'll have approximately $1,647. Without any additional contributions, your investment would grow by $647 purely from compound interest.
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- Income Tax Calculator View -->
+      <section id="view-income-tax-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Income Tax Calculator (Estimate)</h1>
+            <p class="page-description">
+              Get a rough estimate of your income tax based on simplified progressive tax brackets. This is for educational purposes only and not official tax advice.
+            </p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <h2>Calculate Your Estimated Tax</h2>
+              <form id="income-tax-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="tax-annual-income">Annual Taxable Income</label>
+                  <input type="number" id="tax-annual-income" value="50000" min="0" step="1000" placeholder="Enter annual income" />
+                </div>
+
+                <div class="form-group">
+                  <label for="tax-filing-status">Filing Status</label>
+                  <select id="tax-filing-status">
+                    <option value="single" selected>Single</option>
+                    <option value="married">Married Filing Jointly</option>
+                  </select>
+                </div>
+
+                <button type="button" id="tax-calculate-btn">Calculate Tax</button>
+                <div id="tax-page-result" class="result"></div>
+              </form>
+            </section>
+          </div>
+          <section class="content-section">
+            <div id="tax-results-section" style="display: none; margin-top: var(--spacing-xl);">
+              <div class="calculator-card">
+                <h2>Tax Estimate</h2>
+                <div class="results-cards">
+                  <div class="result-card">
+                    <h3>Estimated Tax</h3>
+                    <p class="result-value" id="tax-result-total-tax">$0.00</p>
+                    <small>Total tax owed</small>
+                  </div>
+                  <div class="result-card">
+                    <h3>Effective Tax Rate</h3>
+                    <p class="result-value" id="tax-result-effective-rate">0.00%</p>
+                    <small>Tax as percentage of income</small>
+                  </div>
+                </div>
+                <div id="tax-breakdown-container" class="schedule-container"></div>
+                <div class="pregnancy-disclaimer" style="margin-top: var(--spacing-lg);">
+                  <p>
+                    <strong>Disclaimer:</strong> This is a simplified estimate for educational purposes only, not tax advice. 
+                    Actual tax calculations are more complex and depend on many factors including deductions, credits, and specific tax laws. 
+                    Always consult with a tax professional or use official tax software for accurate calculations.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <h2>How Income Tax Works</h2>
+            <p>
+              Income tax in the United States uses a progressive tax system, meaning different portions of your income are taxed at different rates. Lower income is taxed at lower rates, and higher income is taxed at higher rates.
+            </p>
+            <h3>Understanding Tax Brackets</h3>
+            <p>
+              Tax brackets are ranges of income that are taxed at specific rates. For example, if you earn $50,000:
+            </p>
+            <ul class="feature-list">
+              <li>The first portion of your income is taxed at the lowest rate (e.g., 10%)</li>
+              <li>The next portion is taxed at a higher rate (e.g., 12%)</li>
+              <li>And so on, with each bracket applying only to income within that range</li>
+            </ul>
+            <h3>Important Notes</h3>
+            <p>
+              This calculator uses simplified, sample tax brackets for demonstration purposes only. Real tax calculations involve:
+            </p>
+            <ul class="feature-list">
+              <li>Standard or itemized deductions</li>
+              <li>Tax credits</li>
+              <li>Different rates for different types of income</li>
+              <li>State and local taxes</li>
+              <li>Many other factors</li>
+            </ul>
+            <p>
+              <strong>Always consult with a qualified tax professional or use official tax preparation software for accurate tax calculations.</strong>
+            </p>
+          </section>
+        </main>
+      </section>
+
+      <!-- Currency Converter View -->
+      <section id="view-currency-converter" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Currency Converter</h1>
+            <p class="page-description">
+              Convert between major world currencies in real time using live exchange rates.
+            </p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <h2>Convert Currency</h2>
+              <form id="currency-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="currency-amount">Amount</label>
+                  <input type="number" id="currency-amount" value="100" min="0" step="0.01" placeholder="Enter amount" />
+                </div>
+
+                <div class="form-group">
+                  <label for="currency-from">From Currency</label>
+                  <select id="currency-from"></select>
+                </div>
+
+                <div class="form-group">
+                  <label for="currency-to">To Currency</label>
+                  <select id="currency-to"></select>
+                </div>
+
+                <button type="button" id="currency-convert-btn">Convert</button>
+                <div id="currency-loading" class="result" style="display: none;"></div>
+                <div id="currency-error" class="result" style="display: none; color: var(--color-error); border-color: var(--color-error);"></div>
+                <div id="currency-result" class="result"></div>
+                <div id="currency-inverse-rate" style="margin-top: var(--spacing-sm); color: var(--color-text-secondary); font-size: var(--font-size-sm);"></div>
+                <div id="currency-last-updated" style="margin-top: var(--spacing-xs); color: var(--color-text-muted); font-size: var(--font-size-xs);"></div>
+              </form>
+            </section>
+          </div>
+          <section class="content-section">
+            <h2>How to Use the Currency Converter</h2>
+            <p>
+              Enter the amount you want to convert, select the source currency (From) and target currency (To), then click "Convert". The calculator uses live exchange rates updated daily to provide accurate conversions.
+            </p>
+            <h3>Supported Currencies</h3>
+            <p>
+              This converter supports major world currencies including USD, EUR, GBP, JPY, CAD, AUD, CHF, INR, CNY, RWF, and KES. Exchange rates are fetched from a reliable, free API and are updated regularly.
+            </p>
+            <h3>Important Notes</h3>
+            <ul class="feature-list">
+              <li>Exchange rates are updated daily and may vary throughout the day.</li>
+              <li>Rates shown are mid-market rates and may differ from rates offered by banks or currency exchange services.</li>
+              <li>This tool is for informational purposes only and should not be used for actual currency transactions without verifying current rates.</li>
+              <li>Rates are cached for 1 hour to reduce API calls and improve performance.</li>
+            </ul>
+          </section>
+        </main>
+      </section>
+
+      <!-- Date Difference Calculator View -->
+      <section id="view-date-difference-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Date Difference Calculator</h1>
+            <p class="page-description">Calculate the precise difference between any two dates in years, months, weeks, and days.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <div class="form-group">
+                <label for="diff-start-date-input">Start date</label>
+                <input type="date" id="diff-start-date-input" name="start-date" />
+              </div>
+              <div class="form-group">
+                <label for="diff-end-date-input">End date</label>
+                <input type="date" id="diff-end-date-input" name="end-date" />
+              </div>
+              <button type="button" id="diff-calculate-btn">Calculate Difference</button>
+              <div id="diff-page-result" class="result"></div>
+            </section>
+          </div>
+          <section class="content-section">
+            <h2>How to Use the Date Difference Calculator</h2>
+            <p>
+              Select any two dates using the date pickers above and click "Calculate Difference". The calculator will display the time span between the two dates in years, months, weeks, and days. Perfect for project timelines, event planning, or tracking durations between important dates.
+            </p>
+            <h3>What is a Date Difference Calculator?</h3>
+            <p>
+              A date difference calculator is a practical tool that computes the time span between any two dates. Whether you need to know how many days until a deadline, how long a project has been running, or the duration between two significant events, this calculator provides you with the answer in multiple formats including days, weeks, months, and years.
+            </p>
+            <p>
+              This calculator is invaluable for project planning, event organization, tracking durations, calculating interest periods, or any situation where you need to know the exact time difference between two dates. It handles all the complexities of calendar calculations, including leap years and months with different numbers of days, to give you accurate results.
+            </p>
+            <h3>How accurate is this calculator?</h3>
+            <p>
+              Our calculator uses precise date arithmetic that accounts for leap years, varying month lengths (28-31 days), and all calendar complexities. The results are accurate to the day, making it suitable for both personal and professional use.
+            </p>
+            <h3>What if the end date is before the start date?</h3>
+            <p>
+              The end date must be equal to or after the start date. If you enter an end date that is before the start date, you'll receive an error message prompting you to correct the dates. This ensures logical and meaningful results.
+            </p>
+          </section>
+        </main>
+      </section>
+
       <!-- About View -->
       <section id="view-about" class="view view-hidden">
         <div class="content-page">
-          <h1>About Smart Age Tools</h1>
+          <h1>About Smart Tools Hub</h1>
           <p>
-            Smart Age Tools is a collection of free online calculators focused on age, dates, and simple everyday calculations. 
+            Smart Tools Hub is a collection of free online calculators focused on age, dates, and simple everyday calculations. 
             Our mission is to provide fast, accurate, and easy-to-use tools that help people quickly solve common calculation problems 
             without needing spreadsheets or complex software.
           </p>
@@ -167,14 +1070,14 @@
             <strong>Last Updated:</strong> November 2025
           </p>
           <p>
-            At Smart Age Tools, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your 
+            At Smart Tools Hub, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your 
             information when you use our website and calculators. By using our website, you agree to the collection and use of 
             information in accordance with this policy.
           </p>
 
           <h2>Introduction</h2>
           <p>
-            Smart Age Tools is committed to protecting your privacy. This policy describes the types of information we may collect 
+            Smart Tools Hub is committed to protecting your privacy. This policy describes the types of information we may collect 
             from you or that you may provide when you visit our website, and our practices for collecting, using, maintaining, and 
             disclosing that information.
           </p>
@@ -352,19 +1255,19 @@
             <strong>Last Updated:</strong> November 2025
           </p>
           <p>
-            Please read these Terms and Conditions carefully before using Smart Age Tools. By accessing or using our website, 
+            Please read these Terms and Conditions carefully before using Smart Tools Hub. By accessing or using our website, 
             you agree to be bound by these terms. If you disagree with any part of these terms, you may not access the service.
           </p>
 
           <h2>Acceptance of Terms</h2>
           <p>
-            By accessing and using Smart Age Tools, you accept and agree to be bound by the terms and provision of this agreement. 
+            By accessing and using Smart Tools Hub, you accept and agree to be bound by the terms and provision of this agreement. 
             If you do not agree to abide by the above, please do not use this service.
           </p>
 
           <h2>Use of the Website</h2>
           <p>
-            Smart Age Tools provides free online calculators for calculating ages and date differences. You may use our website and 
+            Smart Tools Hub provides free online calculators for calculating ages and date differences. You may use our website and 
             calculators for personal, educational, or commercial purposes, subject to these terms. You agree to use the website 
             only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use 
             and enjoyment of the website.
@@ -381,7 +1284,7 @@
 
           <h2>No Professional Advice</h2>
           <p>
-            The calculators and information provided on Smart Age Tools are for informational purposes only. The results from our 
+            The calculators and information provided on Smart Tools Hub are for informational purposes only. The results from our 
             calculators are not intended to be, and should not be construed as, legal, financial, medical, or professional advice 
             of any kind.
           </p>
@@ -394,7 +1297,7 @@
 
           <h2>Limitation of Liability</h2>
           <p>
-            Smart Age Tools, its owner, and contributors shall not be liable for any indirect, incidental, special, consequential, 
+            Smart Tools Hub, its owner, and contributors shall not be liable for any indirect, incidental, special, consequential, 
             or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, 
             resulting from your use or inability to use the website or calculators.
           </p>
@@ -410,7 +1313,7 @@
 
           <h2>Third-Party Links and Ads</h2>
           <p>
-            Our website may contain links to third-party websites or services that are not owned or controlled by Smart Age Tools. 
+            Our website may contain links to third-party websites or services that are not owned or controlled by Smart Tools Hub. 
             We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party 
             websites or services.
           </p>
@@ -423,7 +1326,7 @@
 
           <h2>Intellectual Property</h2>
           <p>
-            The website and its original content, features, and functionality are owned by Smart Age Tools and are protected by 
+            The website and its original content, features, and functionality are owned by Smart Tools Hub and are protected by 
             international copyright, trademark, patent, trade secret, and other intellectual property laws. You may not modify, 
             reproduce, distribute, create derivative works of, publicly display, or otherwise use any content from this website 
             without our prior written permission.
@@ -493,7 +1396,7 @@
               </p>
             </div>
           </div>
-          <p class="footer-copyright">&copy; <span id="current-year">2025</span> Smart Age Tools. Free to use.</p>
+          <p class="footer-copyright">&copy; <span id="current-year">2025</span> Smart Tools Hub. All rights reserved.</p>
         </div>
       </footer>
     </div>
