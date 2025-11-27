@@ -2,12 +2,46 @@
  * Navigation configuration - single source of truth for all navigation items
  */
 
+import { TOOL_CATEGORIES, CATEGORY_ICONS } from './toolsConfig';
+
 export interface NavItem {
   label: string;
   route?: string;
   view?: string;
   type: 'link' | 'dropdown';
   children?: NavItem[];
+  icon?: string; // For category icons
+}
+
+/**
+ * Generate Tools dropdown structure from TOOL_CATEGORIES
+ */
+function generateToolsNavItems(): NavItem[] {
+  const toolsNavItems: NavItem[] = [
+    {
+      label: 'All Tools',
+      route: '/tools',
+      type: 'link',
+    },
+  ];
+
+  // Add each category as a nested dropdown
+  TOOL_CATEGORIES.forEach(category => {
+    const categoryItem: NavItem = {
+      label: category.title,
+      type: 'dropdown',
+      icon: CATEGORY_ICONS[category.id] || '🧰',
+      children: category.tools.map(tool => ({
+        label: tool.name,
+        route: tool.path,
+        type: 'link',
+        icon: tool.icon,
+      })),
+    };
+    toolsNavItems.push(categoryItem);
+  });
+
+  return toolsNavItems;
 }
 
 /**
@@ -22,58 +56,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Tools',
     type: 'dropdown',
-    children: [
-      {
-        label: 'Age Calculator',
-        route: '/age-calculator',
-        type: 'link',
-      },
-      {
-        label: 'Date Difference',
-        route: '/date-difference-calculator',
-        type: 'link',
-      },
-      {
-        label: 'Mortgage Calculator',
-        route: '/mortgage-calculator',
-        type: 'link',
-      },
-      {
-        label: 'Car Loan Calculator',
-        route: '/car-loan-calculator',
-        type: 'link',
-      },
-      {
-        label: 'BMI Calculator',
-        route: '/bmi-calculator',
-        type: 'link',
-      },
-      {
-        label: 'GPA Calculator',
-        route: '/gpa-calculator',
-        type: 'link',
-      },
-      {
-        label: 'Pregnancy Due Date',
-        route: '/pregnancy-due-date',
-        type: 'link',
-      },
-      {
-        label: 'Compound Interest',
-        route: '/compound-interest',
-        type: 'link',
-      },
-      {
-        label: 'Income Tax',
-        route: '/income-tax-calculator',
-        type: 'link',
-      },
-      {
-        label: 'Currency Converter',
-        route: '/currency-converter',
-        type: 'link',
-      },
-    ],
+    children: generateToolsNavItems(),
   },
   {
     label: 'About',

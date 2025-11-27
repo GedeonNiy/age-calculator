@@ -5,6 +5,11 @@
 import type { SEOData } from '../utils/seo';
 
 export const SEO_CONFIG: Record<string, SEOData> = {
+  'view-tools': {
+    title: 'All Tools - Smart Tools Hub | Free Online Calculators',
+    description: 'Browse our complete collection of free online calculators organized by category. Date & Time, Finance, Health, Education tools and more.',
+    path: '/tools',
+  },
   'view-home': {
     title: 'Smart Tools Hub – Free Online Calculators',
     description: 'Free, no sign-in online calculators for dates, finance, health, education and more. Smart Tools Hub offers 10+ fast, accurate tools in one place.',

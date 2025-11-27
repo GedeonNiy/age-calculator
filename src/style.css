@@ -380,6 +380,86 @@ body {
   outline-offset: -2px;
 }
 
+/* Nested Dropdown Styles */
+.nested-dropdown {
+  position: relative;
+}
+
+.nested-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+}
+
+.nested-arrow {
+  font-size: 0.7em;
+  transition: transform 0.2s ease;
+  margin-left: auto;
+}
+
+.nested-dropdown-toggle[aria-expanded="true"] .nested-arrow {
+  transform: rotate(90deg);
+}
+
+.nested-dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 200px;
+  padding: var(--spacing-xs) 0;
+  margin-left: var(--spacing-xs);
+  z-index: 1001;
+}
+
+.nested-dropdown-toggle[aria-expanded="true"] + .nested-dropdown-menu {
+  display: block;
+}
+
+.nested-dropdown-item {
+  padding-left: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+.dropdown-icon {
+  display: inline-block;
+  margin-right: var(--spacing-xs);
+  font-size: 1em;
+}
+
+/* Desktop: Show nested dropdown on hover */
+@media (min-width: 769px) {
+  .nested-dropdown:hover .nested-dropdown-menu {
+    display: block;
+  }
+
+  .nested-dropdown:hover .nested-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* Mobile: Nested dropdown positioning */
+@media (max-width: 768px) {
+  .nested-dropdown-menu {
+    position: static;
+    margin-left: 0;
+    margin-top: var(--spacing-xs);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: none;
+    border-top: 1px solid var(--color-border-light);
+    border-radius: 0;
+  }
+
+  .nested-dropdown-item {
+    padding-left: var(--spacing-xl);
+  }
+}
+
 .nav-link:hover {
   color: var(--color-primary);
   border-bottom-color: var(--color-primary-light);
@@ -549,6 +629,118 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--spacing-lg);
+}
+
+/* Responsive grid for tools */
+@media (max-width: 768px) {
+  .tools-in-category {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tools-in-category {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+  }
+}
+
+@media (min-width: 1025px) {
+  .tools-in-category {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+  }
+}
+
+/* Accordion Styles (for Tools page) */
+.accordion-item {
+  margin-bottom: var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-light);
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  text-align: left;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.accordion-header:hover {
+  background: var(--color-bg-light, #f9fafb);
+}
+
+.accordion-header:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.accordion-header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.accordion-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.accordion-header-text {
+  flex: 1;
+}
+
+.accordion-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.accordion-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.accordion-chevron {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordion-content {
+  padding: 0 var(--spacing-xl) var(--spacing-xl);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Responsive accordion */
+@media (max-width: 768px) {
+  .accordion-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .accordion-content {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .accordion-title {
+    font-size: var(--font-size-lg);
+  }
 }
 
 .tool-card {

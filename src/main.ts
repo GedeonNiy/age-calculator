@@ -2,6 +2,7 @@ import './style.css'
 import emailjs from '@emailjs/browser'
 import { EMAILJS_CONFIG, isEmailJSConfigured } from './emailjs-config'
 import { NAV_ITEMS } from './config/navigation'
+import { TOOL_CATEGORIES, POPULAR_TOOLS, CATEGORY_ICONS } from './config/toolsConfig'
 import { updateSEO } from './utils/seo'
 import { SEO_CONFIG } from './config/seo'
 import { initAgeCalculator } from './pages/ageCalculator'
@@ -24,7 +25,7 @@ import './styles/chatWidget.css'
  */
 const routeToView: Record<string, string> = {
   '/': 'view-home',
-  '/tools': 'view-home', // Tools page is the home page with tools grid
+  '/tools': 'view-tools', // All Tools page with categorized tools
   '/age-calculator': 'view-age-calculator',
   '/mortgage-calculator': 'view-mortgage-calculator',
   '/date-difference': 'view-date-difference-calculator',
@@ -48,6 +49,7 @@ const routeToView: Record<string, string> = {
  */
 const viewToTitle: Record<string, string> = {
   'view-home': 'Smart Tools Hub - Free Age & Date Calculators',
+  'view-tools': 'All Tools - Smart Tools Hub',
   'view-age-calculator': 'Age Calculator | Smart Tools Hub',
   'view-mortgage-calculator': 'Mortgage Calculator | Smart Tools Hub',
   'view-date-difference-calculator': 'Date Difference Calculator | Smart Tools Hub',
@@ -82,6 +84,36 @@ function showView(viewId: string): void {
     targetView.classList.remove('view-hidden');
     // Scroll to top of page
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Re-render tools grid when navigating to tools page
+  if (viewId === 'view-tools') {
+    renderToolsGrid();
+    // Handle hash navigation to scroll to category and expand it
+    setTimeout(() => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const categoryElement = document.getElementById(hash);
+        if (categoryElement) {
+          // Find the accordion header and content
+          const accordionHeader = categoryElement.querySelector('.accordion-header') as HTMLElement;
+          const accordionContent = categoryElement.querySelector('.accordion-content') as HTMLElement;
+          const chevron = categoryElement.querySelector('.accordion-chevron') as HTMLElement;
+          
+          if (accordionHeader && accordionContent) {
+            // Expand the category
+            accordionHeader.setAttribute('aria-expanded', 'true');
+            accordionContent.style.display = 'block';
+            if (chevron) {
+              chevron.style.transform = 'rotate(180deg)';
+            }
+          }
+          
+          // Scroll to category
+          categoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, 150);
   }
 
   // Update SEO meta tags
@@ -123,11 +155,22 @@ function getCurrentRoute(): string {
  * Navigates to a route
  */
 function navigateTo(route: string): void {
+  // Extract path and hash if present
+  const [path, hash] = route.split('#');
   window.history.pushState({}, '', route);
-  const viewId = routeToView[route];
+  const viewId = routeToView[path] || routeToView[route];
   
   if (viewId) {
     showView(viewId);
+    // Handle hash navigation after view is shown
+    if (hash) {
+      setTimeout(() => {
+        const categoryElement = document.getElementById(hash);
+        if (categoryElement) {
+          categoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 200);
+    }
   } else {
     // Handle 404 - show home with noindex SEO
     updateSEO({
@@ -171,6 +214,155 @@ function showToast(message: string, type: 'success' | 'error' = 'success'): void
     }, 300);
   }, 3000);
 }
+
+/**
+ * Create a tool card element
+ */
+function createToolCard(tool: { name: string; path: string; icon: string; description: string }): HTMLElement {
+  const toolCard = document.createElement('button');
+  toolCard.type = 'button';
+  toolCard.className = 'tool-card';
+  toolCard.setAttribute('data-route', tool.path);
+
+  const icon = document.createElement('div');
+  icon.className = 'tool-icon';
+  icon.textContent = tool.icon;
+
+  const name = document.createElement('h4');
+  name.textContent = tool.name;
+
+  const description = document.createElement('p');
+  description.textContent = tool.description;
+
+  const arrow = document.createElement('span');
+  arrow.className = 'tool-arrow';
+  arrow.textContent = '→';
+
+  toolCard.appendChild(icon);
+  toolCard.appendChild(name);
+  toolCard.appendChild(description);
+  toolCard.appendChild(arrow);
+
+  return toolCard;
+}
+
+/**
+ * Render tools grid with accordion/collapsible categories (for All Tools page)
+ */
+function renderToolsGrid(): void {
+  const container = document.getElementById('tools-grid-container');
+  if (!container) return;
+
+  // Clear existing content
+  container.innerHTML = '';
+
+  TOOL_CATEGORIES.forEach((category, index) => {
+    // Create accordion item
+    const accordionItem = document.createElement('div');
+    accordionItem.className = 'accordion-item';
+    accordionItem.id = category.id; // Add ID for hash navigation
+
+    // Accordion header (clickable)
+    const accordionHeader = document.createElement('button');
+    accordionHeader.type = 'button';
+    accordionHeader.className = 'accordion-header';
+    accordionHeader.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
+    accordionHeader.setAttribute('aria-controls', `accordion-content-${category.id}`);
+
+    const headerContent = document.createElement('div');
+    headerContent.className = 'accordion-header-content';
+
+    const icon = document.createElement('span');
+    icon.className = 'accordion-icon';
+    icon.textContent = CATEGORY_ICONS[category.id] || '🧰';
+
+    const headerText = document.createElement('div');
+    headerText.className = 'accordion-header-text';
+
+    const title = document.createElement('h3');
+    title.className = 'accordion-title';
+    title.textContent = category.title;
+
+    const subtitle = document.createElement('p');
+    subtitle.className = 'accordion-subtitle';
+    // Create subtitle from tool names
+    const toolNames = category.tools.map(t => t.name).join(', ');
+    subtitle.textContent = toolNames || category.description;
+
+    headerText.appendChild(title);
+    headerText.appendChild(subtitle);
+    headerContent.appendChild(icon);
+    headerContent.appendChild(headerText);
+
+    const chevron = document.createElement('span');
+    chevron.className = 'accordion-chevron';
+    chevron.innerHTML = '▼';
+
+    accordionHeader.appendChild(headerContent);
+    accordionHeader.appendChild(chevron);
+
+    // Accordion content (collapsible)
+    const accordionContent = document.createElement('div');
+    accordionContent.className = 'accordion-content';
+    accordionContent.id = `accordion-content-${category.id}`;
+    accordionContent.style.display = index === 0 ? 'block' : 'none';
+
+    const toolsContainer = document.createElement('div');
+    toolsContainer.className = 'tools-in-category';
+
+    if (category.tools.length === 0) {
+      // Show "Coming soon" message for empty categories
+      const comingSoon = document.createElement('p');
+      comingSoon.className = 'coming-soon-message';
+      comingSoon.textContent = 'More tools coming soon!';
+      comingSoon.style.cssText = 'color: var(--color-text-secondary); font-style: italic; padding: var(--spacing-lg); text-align: center;';
+      toolsContainer.appendChild(comingSoon);
+    } else {
+      // Create tool cards
+      category.tools.forEach(tool => {
+        toolsContainer.appendChild(createToolCard(tool));
+      });
+    }
+
+    accordionContent.appendChild(toolsContainer);
+
+    // Toggle functionality
+    accordionHeader.addEventListener('click', () => {
+      const isExpanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+      const newState = !isExpanded;
+      
+      accordionHeader.setAttribute('aria-expanded', String(newState));
+      accordionContent.style.display = newState ? 'block' : 'none';
+      chevron.style.transform = newState ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+
+    accordionItem.appendChild(accordionHeader);
+    accordionItem.appendChild(accordionContent);
+    container.appendChild(accordionItem);
+  });
+}
+
+/**
+ * Render popular tools on home page
+ */
+function renderPopularTools(): void {
+  const container = document.getElementById('popular-tools-container');
+  if (!container) return;
+
+  // Clear existing content
+  container.innerHTML = '';
+
+  const toolsContainer = document.createElement('div');
+  toolsContainer.className = 'tools-in-category';
+
+  POPULAR_TOOLS.forEach(tool => {
+    toolsContainer.appendChild(createToolCard(tool));
+  });
+
+  container.appendChild(toolsContainer);
+}
+
+// Removed renderCategoryCards - no longer needed on home page
 
 /**
  * Render navigation items from configuration
@@ -218,15 +410,81 @@ function renderNavigation(): void {
       dropdownMenu.setAttribute('role', 'menu');
 
       item.children.forEach((child) => {
-        const childButton = document.createElement('button');
-        childButton.type = 'button';
-        childButton.className = 'dropdown-item';
-        childButton.setAttribute('role', 'menuitem');
-        childButton.textContent = child.label;
-        if (child.route) {
-          childButton.setAttribute('data-route', child.route);
+        if (child.type === 'dropdown' && child.children) {
+          // Nested dropdown (category with tools)
+          const nestedDropdown = document.createElement('div');
+          nestedDropdown.className = 'nested-dropdown';
+
+          const nestedToggle = document.createElement('button');
+          nestedToggle.type = 'button';
+          nestedToggle.className = 'dropdown-item nested-dropdown-toggle';
+          nestedToggle.setAttribute('aria-expanded', 'false');
+          nestedToggle.setAttribute('aria-haspopup', 'true');
+          
+          // Add icon if present
+          if (child.icon) {
+            nestedToggle.innerHTML = `<span class="dropdown-icon">${child.icon}</span> ${child.label} <span class="nested-arrow">▶</span>`;
+          } else {
+            nestedToggle.innerHTML = `${child.label} <span class="nested-arrow">▶</span>`;
+          }
+
+          const nestedMenu = document.createElement('div');
+          nestedMenu.className = 'nested-dropdown-menu';
+          nestedMenu.setAttribute('role', 'menu');
+
+          child.children.forEach((tool) => {
+            const toolButton = document.createElement('button');
+            toolButton.type = 'button';
+            toolButton.className = 'dropdown-item nested-dropdown-item';
+            toolButton.setAttribute('role', 'menuitem');
+            
+            // Add icon if present
+            if (tool.icon) {
+              toolButton.innerHTML = `<span class="dropdown-icon">${tool.icon}</span> ${tool.label}`;
+            } else {
+              toolButton.textContent = tool.label;
+            }
+            
+            if (tool.route) {
+              toolButton.setAttribute('data-route', tool.route);
+            }
+            nestedMenu.appendChild(toolButton);
+          });
+
+          // Toggle nested dropdown
+          nestedToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isExpanded = nestedToggle.getAttribute('aria-expanded') === 'true';
+            nestedToggle.setAttribute('aria-expanded', String(!isExpanded));
+            (nestedMenu as HTMLElement).style.display = !isExpanded ? 'block' : 'none';
+            const arrow = nestedToggle.querySelector('.nested-arrow') as HTMLElement;
+            if (arrow) {
+              arrow.style.transform = !isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
+            }
+          });
+
+          nestedDropdown.appendChild(nestedToggle);
+          nestedDropdown.appendChild(nestedMenu);
+          dropdownMenu.appendChild(nestedDropdown);
+        } else {
+          // Regular dropdown item (link)
+          const childButton = document.createElement('button');
+          childButton.type = 'button';
+          childButton.className = 'dropdown-item';
+          childButton.setAttribute('role', 'menuitem');
+          
+          // Add icon if present
+          if (child.icon) {
+            childButton.innerHTML = `<span class="dropdown-icon">${child.icon}</span> ${child.label}`;
+          } else {
+            childButton.textContent = child.label;
+          }
+          
+          if (child.route) {
+            childButton.setAttribute('data-route', child.route);
+          }
+          dropdownMenu.appendChild(childButton);
         }
-        dropdownMenu.appendChild(childButton);
       });
 
       dropdownContainer.appendChild(toggleButton);
@@ -239,6 +497,12 @@ function renderNavigation(): void {
 document.addEventListener('DOMContentLoaded', () => {
   // Render navigation from configuration
   renderNavigation();
+
+  // Render tools grid from configuration (for All Tools page)
+  renderToolsGrid();
+
+  // Render popular tools on home page
+  renderPopularTools();
 
   // Set current year in footer
   const yearElement = document.getElementById('current-year');
@@ -275,6 +539,18 @@ document.addEventListener('DOMContentLoaded', () => {
       dd.classList.remove('active');
       const toggle = dd.querySelector('.nav-dropdown-toggle');
       toggle?.setAttribute('aria-expanded', 'false');
+    });
+    // Close nested dropdowns
+    document.querySelectorAll('.nested-dropdown-toggle').forEach(toggle => {
+      toggle.setAttribute('aria-expanded', 'false');
+      const menu = toggle.nextElementSibling as HTMLElement;
+      if (menu && menu.classList.contains('nested-dropdown-menu')) {
+        menu.style.display = 'none';
+      }
+      const arrow = toggle.querySelector('.nested-arrow') as HTMLElement;
+      if (arrow) {
+        arrow.style.transform = 'rotate(0deg)';
+      }
     });
   };
   
@@ -371,11 +647,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Close mobile menu and dropdown after navigation
       closeMobileMenu();
-      document.querySelectorAll('.nav-dropdown').forEach(dd => {
-        dd.classList.remove('active');
-        const toggle = dd.querySelector('.nav-dropdown-toggle');
-        toggle?.setAttribute('aria-expanded', 'false');
-      });
     }
   });
 
@@ -408,6 +679,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (route) {
         navigateTo(route);
       }
+      return;
+    }
+
+    // Category card links
+    const categoryCardLink = target.closest('.category-card-link') as HTMLElement;
+    if (categoryCardLink) {
+      e.preventDefault();
+      const route = categoryCardLink.getAttribute('data-route');
+      if (route) {
+        navigateTo(route);
+      }
+      return;
     }
   });
 
