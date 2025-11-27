@@ -8,6 +8,14 @@ export default defineConfig({
     host: true, // Allow access from network (for mobile testing)
     port: 5173, // Default Vite port
     strictPort: false, // Allow port to be changed if 5173 is busy
+    // Proxy API requests to local dev server
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });
 

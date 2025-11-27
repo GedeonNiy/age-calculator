@@ -15,6 +15,10 @@ import { initCompoundInterestCalculator } from './pages/compoundInterestCalculat
 import { initIncomeTaxCalculator } from './pages/incomeTaxCalculator'
 import { initCurrencyConverter } from './pages/currencyConverter'
 
+// Initialize chat widget
+import './mainChat'
+import './styles/chatWidget.css'
+
 /**
  * Route to view mapping
  */
