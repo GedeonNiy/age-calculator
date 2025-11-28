@@ -55,6 +55,56 @@ export const SEO_CONFIG: Record<string, SEOData> = {
     description: 'Convert between popular currencies using live or regularly updated exchange rates with this free currency converter.',
     path: '/currency-converter',
   },
+  'view-plagiarism-checker': {
+    title: 'Plagiarism / Text Similarity Checker – Smart Tools Hub',
+    description: 'Compare two texts locally to check for similarity. Free local text comparison tool for students and writers.',
+    path: '/plagiarism-checker',
+  },
+  'view-pdf-to-word': {
+    title: 'PDF to Word Converter – Free PDF to DOCX Tool',
+    description: 'Convert PDF files to Word documents (.docx). Extract text from PDFs for editing.',
+    path: '/pdf-to-word',
+  },
+  'view-word-to-pdf': {
+    title: 'Word to PDF Converter – Free DOCX to PDF Tool',
+    description: 'Convert Word documents (.docx) or paste text to create a PDF file instantly.',
+    path: '/word-to-pdf',
+  },
+  'view-text-to-speech': {
+    title: 'Text-to-Speech Converter – Free TTS Tool',
+    description: 'Convert text to speech using your browser. Listen to your notes, essays, or reading assignments.',
+    path: '/text-to-speech',
+  },
+  'view-essay-improver': {
+    title: 'AI Essay Improver – Improve Your Writing',
+    description: 'AI-powered tool to improve clarity, grammar, and readability of your writing while preserving meaning.',
+    path: '/essay-improver',
+  },
+  'view-summarizer': {
+    title: 'Text Summarizer – AI-Powered Summary Tool',
+    description: 'Summarize long articles, chapters, or notes using AI. Get concise summaries while preserving key information.',
+    path: '/summarizer',
+  },
+  'view-pdf-jpg-converter': {
+    title: 'PDF ↔ JPG Converter – Free Image Conversion Tool',
+    description: 'Convert PDF pages to JPG images or combine multiple images into a PDF document.',
+    path: '/pdf-jpg-converter',
+  },
+  'view-citation-generator': {
+    title: 'Citation Generator – APA & MLA Citation Tool',
+    description: 'Generate properly formatted citations in APA or MLA style for books, articles, websites, and YouTube videos.',
+    path: '/citation-generator',
+  },
+  'view-grammar-checker': {
+    title: 'Grammar & Spelling Checker – AI Grammar Tool',
+    description: 'Check and correct grammar, spelling, and punctuation errors in your text using AI.',
+    path: '/grammar-checker',
+  },
+  'view-pdf-merge-split': {
+    title: 'PDF Merger & Splitter – Combine or Split PDFs',
+    description: 'Merge multiple PDF files into one document, or split a PDF into separate pages.',
+    path: '/pdf-merge-split',
+  },
   'view-bmi-calculator': {
     title: 'BMI Calculator – Body Mass Index',
     description: 'Calculate your BMI (Body Mass Index) using height and weight, and see which weight category you fall into.',

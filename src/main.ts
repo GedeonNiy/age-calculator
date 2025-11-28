@@ -15,6 +15,16 @@ import { initPregnancyDueDateCalculator } from './pages/pregnancyDueDateCalculat
 import { initCompoundInterestCalculator } from './pages/compoundInterestCalculator'
 import { initIncomeTaxCalculator } from './pages/incomeTaxCalculator'
 import { initCurrencyConverter } from './pages/currencyConverter'
+import { initPlagiarismChecker } from './pages/plagiarismChecker'
+import { initPdfToWord } from './pages/pdfToWord'
+import { initWordToPdf } from './pages/wordToPdf'
+import { initTextToSpeech } from './pages/textToSpeech'
+import { initEssayImprover } from './pages/essayImprover'
+import { initSummarizer } from './pages/summarizer'
+import { initPdfJpgConverter } from './pages/pdfJpgConverter'
+import { initCitationGenerator } from './pages/citationGenerator'
+import { initGrammarChecker } from './pages/grammarChecker'
+import { initPdfMergeSplit } from './pages/pdfMergeSplit'
 
 // Initialize chat widget
 import './mainChat'
@@ -38,6 +48,16 @@ const routeToView: Record<string, string> = {
   '/income-tax': 'view-income-tax-calculator',
   '/income-tax-calculator': 'view-income-tax-calculator', // Support both routes
   '/currency-converter': 'view-currency-converter',
+  '/plagiarism-checker': 'view-plagiarism-checker',
+  '/pdf-to-word': 'view-pdf-to-word',
+  '/word-to-pdf': 'view-word-to-pdf',
+  '/text-to-speech': 'view-text-to-speech',
+  '/essay-improver': 'view-essay-improver',
+  '/summarizer': 'view-summarizer',
+  '/pdf-jpg-converter': 'view-pdf-jpg-converter',
+  '/citation-generator': 'view-citation-generator',
+  '/grammar-checker': 'view-grammar-checker',
+  '/pdf-merge-split': 'view-pdf-merge-split',
   '/about': 'view-about',
   '/privacy': 'view-privacy',
   '/terms': 'view-terms',
@@ -60,6 +80,16 @@ const viewToTitle: Record<string, string> = {
   'view-compound-interest-calculator': 'Compound Interest Calculator | Smart Tools Hub',
   'view-income-tax-calculator': 'Income Tax Calculator | Smart Tools Hub',
   'view-currency-converter': 'Currency Converter | Smart Tools Hub',
+  'view-plagiarism-checker': 'Plagiarism Checker | Smart Tools Hub',
+  'view-pdf-to-word': 'PDF to Word Converter | Smart Tools Hub',
+  'view-word-to-pdf': 'Word to PDF Converter | Smart Tools Hub',
+  'view-text-to-speech': 'Text-to-Speech Converter | Smart Tools Hub',
+  'view-essay-improver': 'AI Essay Improver | Smart Tools Hub',
+  'view-summarizer': 'Text Summarizer | Smart Tools Hub',
+  'view-pdf-jpg-converter': 'PDF ↔ JPG Converter | Smart Tools Hub',
+  'view-citation-generator': 'Citation Generator | Smart Tools Hub',
+  'view-grammar-checker': 'Grammar Checker | Smart Tools Hub',
+  'view-pdf-merge-split': 'PDF Merger & Splitter | Smart Tools Hub',
   'view-about': 'About | Smart Tools Hub',
   'view-privacy': 'Privacy Policy | Smart Tools Hub',
   'view-terms': 'Terms & Conditions | Smart Tools Hub',
@@ -738,6 +768,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initCompoundInterestCalculator();
   initIncomeTaxCalculator();
   initCurrencyConverter();
+  
+  // Initialize academic tools
+  initPlagiarismChecker();
+  initPdfToWord();
+  initWordToPdf();
+  initTextToSpeech();
+  initEssayImprover();
+  initSummarizer();
+  initPdfJpgConverter();
+  initCitationGenerator();
+  initGrammarChecker();
+  initPdfMergeSplit();
 
   // Contact form handler with EmailJS
   const contactForm = document.getElementById('contact-form') as HTMLFormElement;

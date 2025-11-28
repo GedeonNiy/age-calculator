@@ -856,6 +856,394 @@
         </main>
       </section>
 
+      <!-- Plagiarism Checker View -->
+      <section id="view-plagiarism-checker" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Plagiarism / Text Similarity Checker</h1>
+            <p class="page-description">Compare two texts locally to check for similarity. This tool does not check against the internet.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="plagiarism-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="original-text">Original Text:</label>
+                  <textarea id="original-text" rows="8" placeholder="Paste your original text here..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="comparison-text">Comparison Text:</label>
+                  <textarea id="comparison-text" rows="8" placeholder="Paste the text to compare here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Check Similarity</button>
+              </form>
+              <div id="plagiarism-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Similarity Score</h3>
+                  <p id="similarity-score" class="result-value"></p>
+                </div>
+                <div class="result-card">
+                  <h3>Interpretation</h3>
+                  <p id="similarity-interpretation" class="result-value"></p>
+                </div>
+                <p class="disclaimer">Note: This is a local text similarity helper. It does NOT check against the entire internet or academic databases.</p>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- PDF to Word Converter View -->
+      <section id="view-pdf-to-word" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>PDF to Word Converter</h1>
+            <p class="page-description">Convert PDF files to Word documents (.docx). Extract text from PDFs for editing.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="pdf-to-word-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="pdf-file-input">Select PDF File:</label>
+                  <input type="file" id="pdf-file-input" accept=".pdf" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Convert to Word (.docx)</button>
+                <div id="pdf-to-word-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="pdf-to-word-result" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Conversion Complete</h3>
+                  <p id="pdf-to-word-download" class="result-value"></p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- Word to PDF Converter View -->
+      <section id="view-word-to-pdf" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Word to PDF Converter</h1>
+            <p class="page-description">Convert Word documents (.docx) or paste text to create a PDF file.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="word-to-pdf-form" class="calculator-form">
+                <div class="form-group">
+                  <label>Input Method:</label>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" name="input-method" value="file" checked>
+                      Upload .docx File
+                    </label>
+                    <label>
+                      <input type="radio" name="input-method" value="text">
+                      Paste Text
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group" id="word-file-group">
+                  <label for="word-file-input">Select Word File:</label>
+                  <input type="file" id="word-file-input" accept=".docx">
+                </div>
+                <div class="form-group view-hidden" id="word-text-group">
+                  <label for="word-text-input">Enter Text:</label>
+                  <textarea id="word-text-input" rows="10" placeholder="Paste or type your text here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Convert to PDF</button>
+                <div id="word-to-pdf-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="word-to-pdf-result" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Conversion Complete</h3>
+                  <p id="word-to-pdf-download" class="result-value"></p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- Text-to-Speech Converter View -->
+      <section id="view-text-to-speech" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Text-to-Speech Converter</h1>
+            <p class="page-description">Convert text to speech using your browser's built-in voices. Listen to your notes, essays, or reading assignments.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="tts-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="tts-text">Enter your text:</label>
+                  <textarea id="tts-text" rows="8" placeholder="Type or paste text to convert to speech..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="tts-voice">Voice Type:</label>
+                  <select id="tts-voice">
+                    <option value="default">Default voice (browser)</option>
+                    <option value="male">Male-like voice</option>
+                    <option value="female">Female-like voice</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button type="button" id="tts-play-btn" class="btn btn-primary">Play</button>
+                  <button type="button" id="tts-stop-btn" class="btn btn-secondary">Stop</button>
+                </div>
+              </form>
+              <p class="disclaimer">Tip: Use this to listen to your notes, essays, or reading assignments.</p>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- Essay Improver View -->
+      <section id="view-essay-improver" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>AI Essay Improver</h1>
+            <p class="page-description">Improve the clarity, grammar, and readability of your writing with AI assistance.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="essay-improver-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="essay-text">Paste your paragraph or essay:</label>
+                  <textarea id="essay-text" rows="10" placeholder="Paste your text here..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Improvement Options:</label>
+                  <div class="checkbox-group">
+                    <label>
+                      <input type="checkbox" name="improve-options" value="clarity" checked>
+                      Improve clarity
+                    </label>
+                    <label>
+                      <input type="checkbox" name="improve-options" value="formal">
+                      Make more formal
+                    </label>
+                    <label>
+                      <input type="checkbox" name="improve-options" value="concise">
+                      Make more concise
+                    </label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Improve Text</button>
+                <div id="essay-improver-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="essay-improver-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Improved Text</h3>
+                  <div id="improved-text" class="result-value" style="white-space: pre-wrap;"></div>
+                  <button type="button" id="copy-improved-btn" class="btn btn-secondary" style="margin-top: 1rem;">Copy Result</button>
+                </div>
+                <p class="disclaimer">Use this to refine your own writing. Do not submit AI text as original work when your school forbids it.</p>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- Text Summarizer View -->
+      <section id="view-summarizer" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Text Summarizer</h1>
+            <p class="page-description">Summarize long articles, chapters, or notes using AI. Get concise summaries while preserving key information.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="summarizer-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="summarizer-text">Paste article, chapter, or notes:</label>
+                  <textarea id="summarizer-text" rows="10" placeholder="Paste your text to summarize..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="summary-length">Summary Length:</label>
+                  <select id="summary-length">
+                    <option value="short">Short (1-2 sentences)</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="detailed">Detailed</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Summarize</button>
+                <div id="summarizer-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="summarizer-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Summary</h3>
+                  <div id="summary-text" class="result-value" style="white-space: pre-wrap;"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- PDF ↔ JPG Converter View -->
+      <section id="view-pdf-jpg-converter" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>PDF ↔ JPG Converter</h1>
+            <p class="page-description">Convert PDF pages to JPG images or combine multiple images into a PDF document.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <div class="form-group">
+                <div class="radio-group">
+                  <label>
+                    <input type="radio" name="conversion-mode" value="pdf-to-jpg" checked>
+                    PDF → JPG
+                  </label>
+                  <label>
+                    <input type="radio" name="conversion-mode" value="jpg-to-pdf">
+                    JPG → PDF
+                  </label>
+                </div>
+              </div>
+              <form id="pdf-jpg-form" class="calculator-form">
+                <div class="form-group" id="pdf-to-jpg-group">
+                  <label for="pdf-jpg-file-input">Select PDF File:</label>
+                  <input type="file" id="pdf-jpg-file-input" accept=".pdf">
+                </div>
+                <div class="form-group view-hidden" id="jpg-to-pdf-group">
+                  <label for="jpg-pdf-file-input">Select Image Files (one or multiple):</label>
+                  <input type="file" id="jpg-pdf-file-input" accept=".jpg,.jpeg,.png" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary">Convert</button>
+                <div id="pdf-jpg-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="pdf-jpg-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Conversion Complete</h3>
+                  <div id="pdf-jpg-downloads" class="result-value"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- Citation Generator View -->
+      <section id="view-citation-generator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Citation Generator (APA / MLA)</h1>
+            <p class="page-description">Generate properly formatted citations in APA or MLA style for books, articles, websites, and more.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="citation-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="citation-style">Citation Style:</label>
+                  <select id="citation-style" required>
+                    <option value="apa">APA</option>
+                    <option value="mla">MLA</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="source-type">Source Type:</label>
+                  <select id="source-type" required>
+                    <option value="book">Book</option>
+                    <option value="journal">Journal Article</option>
+                    <option value="website">Website</option>
+                    <option value="youtube">YouTube Video</option>
+                  </select>
+                </div>
+                <div id="citation-fields">
+                  <!-- Dynamic fields based on source type -->
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Citation</button>
+              </form>
+              <div id="citation-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Formatted Citation</h3>
+                  <div id="citation-output" class="result-value" style="white-space: pre-wrap;"></div>
+                  <button type="button" id="copy-citation-btn" class="btn btn-secondary" style="margin-top: 1rem;">Copy Citation</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- Grammar Checker View -->
+      <section id="view-grammar-checker" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Grammar & Spelling Checker</h1>
+            <p class="page-description">Check and correct grammar, spelling, and punctuation errors in your text using AI.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <form id="grammar-form" class="calculator-form">
+                <div class="form-group">
+                  <label for="grammar-text">Paste your text:</label>
+                  <textarea id="grammar-text" rows="10" placeholder="Paste your text to check..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Check Grammar</button>
+                <div id="grammar-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="grammar-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Corrected Text</h3>
+                  <div id="corrected-text" class="result-value" style="white-space: pre-wrap;"></div>
+                </div>
+                <p class="disclaimer">Always review changes; AI may not be perfect for all contexts.</p>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <!-- PDF Merger & Splitter View -->
+      <section id="view-pdf-merge-split" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>PDF Merger & Splitter</h1>
+            <p class="page-description">Merge multiple PDF files into one document, or split a PDF into separate pages.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <div class="form-group">
+                <div class="radio-group">
+                  <label>
+                    <input type="radio" name="pdf-operation" value="merge" checked>
+                    Merge PDFs
+                  </label>
+                  <label>
+                    <input type="radio" name="pdf-operation" value="split">
+                    Split PDF
+                  </label>
+                </div>
+              </div>
+              <form id="pdf-merge-split-form" class="calculator-form">
+                <div class="form-group" id="merge-group">
+                  <label for="merge-files-input">Select PDF Files (multiple):</label>
+                  <input type="file" id="merge-files-input" accept=".pdf" multiple>
+                  <div id="merge-files-list" style="margin-top: 1rem;"></div>
+                </div>
+                <div class="form-group view-hidden" id="split-group">
+                  <label for="split-file-input">Select PDF File:</label>
+                  <input type="file" id="split-file-input" accept=".pdf">
+                  <label for="split-pages" style="margin-top: 1rem; display: block;">Pages to extract (e.g., 1-3, 7, 10-12):</label>
+                  <input type="text" id="split-pages" placeholder="1-3, 7, 10-12">
+                </div>
+                <button type="submit" class="btn btn-primary">Process PDF</button>
+                <div id="pdf-merge-split-status" class="status-message view-hidden"></div>
+              </form>
+              <div id="pdf-merge-split-results" class="results-cards view-hidden">
+                <div class="result-card">
+                  <h3>Processing Complete</h3>
+                  <div id="pdf-merge-split-download" class="result-value"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
       <!-- Date Difference Calculator View -->
       <section id="view-date-difference-calculator" class="view view-hidden">
         <main>
