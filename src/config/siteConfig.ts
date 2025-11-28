@@ -1,10 +1,11 @@
 /**
  * Site configuration
+ * Updated: 2024
  */
 
 export const SITE_CONFIG = {
   name: 'Smart Tools Hub',
-  description: 'Free online calculators for ages and dates',
+  description: 'Free online Tools',
   domain: 'smartagetools.com',
 } as const;
 
