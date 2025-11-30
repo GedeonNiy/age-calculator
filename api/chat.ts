@@ -7,7 +7,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from '../src/server/openaiClient';
+import { callOpenAI, type ChatMessage } from './openaiClient';
 
 // System prompt for Smart Tools Assistant
 const SYSTEM_PROMPT = `You are **Dyla**, the friendly AI assistant for **Smart Tools Hub** at https://smartagetools.com.
@@ -469,10 +469,13 @@ export default async function handler(
   res: VercelResponse
 ) {
   // Log function invocation
-  console.log('[/api/chat] Function invoked');
+  console.log('[/api/chat] ========== FUNCTION INVOKED ==========');
   console.log('[/api/chat] Method:', req.method);
+  console.log('[/api/chat] URL:', req.url);
   console.log('[/api/chat] Environment check - OPENAI_API_KEY present:', !!process.env.OPENAI_API_KEY);
   console.log('[/api/chat] Environment check - OPENAI_API_KEY length:', process.env.OPENAI_API_KEY?.length || 0);
+  console.log('[/api/chat] Environment check - NODE_ENV:', process.env.NODE_ENV);
+  console.log('[/api/chat] Environment check - callOpenAI function exists:', typeof callOpenAI === 'function');
 
   // Only allow POST requests
   if (req.method !== 'POST') {

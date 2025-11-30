@@ -5,7 +5,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from '../../src/server/openaiClient';
+import { callOpenAI, type ChatMessage } from '../openaiClient';
 
 const SYSTEM_PROMPT = `You summarize academic and informational text. Keep the summary faithful to the original, with no new information. Return ONLY the summary text, with no explanations or commentary.`;
 
