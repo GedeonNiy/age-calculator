@@ -70,3 +70,4 @@ export function formatToolResponse(toolSlug: string, summaryLines: string[]): st
   return `Here are your results:\n\n${bulletPoints}\n\n${linkMarkdown}`;
 }
 
+

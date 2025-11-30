@@ -193,3 +193,4 @@ The system prompt includes:
 - Z-index is set to 9999/10000 to appear above all content
 - The widget does not interfere with existing navigation
 
+

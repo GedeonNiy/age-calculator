@@ -66,3 +66,4 @@ On Vercel, the serverless functions work automatically. Just make sure:
 - `OPENAI_API_KEY` is set in Vercel environment variables
 - The project is deployed
 
+

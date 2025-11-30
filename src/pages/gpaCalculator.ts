@@ -169,3 +169,4 @@ export function initGPACalculator(): void {
   coursesContainer.appendChild(initialRow);
 }
 
+

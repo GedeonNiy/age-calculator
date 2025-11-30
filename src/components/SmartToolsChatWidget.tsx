@@ -155,12 +155,33 @@ export default function SmartToolsChatWidget() {
       const text = await response.text();
       console.log('[ChatWidget] Response text (first 500 chars):', text.substring(0, 500));
       
+      // Check if response is HTML (likely a 404 or error page)
+      if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+        console.error('[ChatWidget] API returned HTML instead of JSON. This usually means the API route was not found.');
+        console.error('[ChatWidget] Full HTML response:', text.substring(0, 2000));
+        setError('API route not found. Please check Vercel deployment and ensure the API route is configured correctly.');
+        const errorMessage: Message = {
+          role: 'assistant',
+          content: 'Sorry, the API endpoint could not be found. Please check the deployment configuration.',
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+        setIsLoading(false);
+        return;
+      }
+      
       try {
         data = JSON.parse(text);
       } catch (parseError) {
         console.error('[ChatWidget] Failed to parse response JSON:', parseError);
         console.error('[ChatWidget] Response was not JSON. Full response:', text.substring(0, 1000));
-        throw new Error('Invalid response from server. The API may not be configured correctly.');
+        setError(`API returned invalid response: ${text.substring(0, 200)}`);
+        const errorMessage: Message = {
+          role: 'assistant',
+          content: `Sorry, I received an invalid response from the server: ${text.substring(0, 200)}`,
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+        setIsLoading(false);
+        return;
       }
 
       if (!response.ok) {

@@ -48,3 +48,4 @@ export function initAgeCalculator(): void {
   dobInput.addEventListener('input', () => clearError('age-dob-input'));
 }
 
+
