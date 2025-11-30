@@ -7,7 +7,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from './openaiClient';
+import { callOpenAI, type ChatMessage } from './openaiClient.js';
 
 // System prompt for Smart Tools Assistant
 const SYSTEM_PROMPT = `You are **Dyla**, the friendly AI assistant for **Smart Tools Hub** at https://smartagetools.com.

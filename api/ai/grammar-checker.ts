@@ -5,7 +5,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from '../openaiClient';
+import { callOpenAI, type ChatMessage } from '../openaiClient.js';
 
 const SYSTEM_PROMPT = `You are a grammar and spelling corrector. Return the corrected version of the text. Do not change the meaning. Do not add or remove sentences. Just fix grammar, spelling, punctuation, and basic word choice. Return ONLY the corrected text, with no explanations or commentary.`;
 

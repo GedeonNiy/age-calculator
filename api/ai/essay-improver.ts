@@ -5,7 +5,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from '../openaiClient';
+import { callOpenAI, type ChatMessage } from '../openaiClient.js';
 
 const SYSTEM_PROMPT = `You are an academic writing assistant. The user will paste a paragraph or essay. Your job is to improve grammar, clarity, and readability while preserving the original meaning. Avoid adding new ideas or making up facts. Return ONLY the improved text, with no explanations or commentary.`;
 
