@@ -469,6 +469,12 @@ export async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  // Log function invocation
+  console.log('[/api/chat] Function invoked');
+  console.log('[/api/chat] Method:', req.method);
+  console.log('[/api/chat] Environment check - OPENAI_API_KEY present:', !!process.env.OPENAI_API_KEY);
+  console.log('[/api/chat] Environment check - OPENAI_API_KEY length:', process.env.OPENAI_API_KEY?.length || 0);
+
   // Only allow POST requests
   if (req.method !== 'POST') {
     console.log('[/api/chat] Method not allowed:', req.method);
@@ -479,8 +485,17 @@ export async function handler(
     // Check for API key first
     if (!process.env.OPENAI_API_KEY) {
       console.error('[/api/chat] OPENAI_API_KEY is missing');
+      console.error('[/api/chat] Available env vars:', Object.keys(process.env).filter(k => k.includes('OPENAI')));
       return res.status(500).json({ 
         error: 'Server is missing OPENAI_API_KEY. Please configure it in Vercel environment variables or .env.local for local development.' 
+      });
+    }
+
+    // Validate API key format
+    if (process.env.OPENAI_API_KEY.startsWith('OPENAI_API_KEY=')) {
+      console.error('[/api/chat] API key appears to include the variable name. It should only contain the key value.');
+      return res.status(500).json({ 
+        error: 'API key configuration error. The value should only contain the API key, not "OPENAI_API_KEY=key".' 
       });
     }
 
@@ -544,6 +559,8 @@ export async function handler(
     console.error('[/api/chat] Error:', error);
     console.error('[/api/chat] Error message:', error?.message);
     console.error('[/api/chat] Error stack:', error?.stack);
+    console.error('[/api/chat] Error name:', error?.name);
+    console.error('[/api/chat] Error constructor:', error?.constructor?.name);
 
     // Return detailed error message (but don't expose API key)
     const errorMessage = error?.message || 'Internal server error';
@@ -557,6 +574,21 @@ export async function handler(
   }
 }
 
-// Default export for Vercel
-export default handler;
+// Wrap handler to catch any initialization errors
+const wrappedHandler = async (req: VercelRequest, res: VercelResponse) => {
+  try {
+    await handler(req, res);
+  } catch (error: any) {
+    console.error('[/api/chat] Unhandled error in wrapper:', error);
+    console.error('[/api/chat] Unhandled error stack:', error?.stack);
+    if (!res.headersSent) {
+      return res.status(500).json({
+        error: 'An unexpected error occurred. Please check the server logs.',
+      });
+    }
+  }
+};
+
+// Default export for Vercel - use wrapped handler to catch all errors
+export default wrappedHandler;
 
