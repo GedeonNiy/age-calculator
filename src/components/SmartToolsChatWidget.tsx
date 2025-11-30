@@ -149,13 +149,18 @@ export default function SmartToolsChatWidget() {
       });
 
       console.log('[ChatWidget] Response status:', response.status, response.statusText);
+      console.log('[ChatWidget] Response headers:', Object.fromEntries(response.headers.entries()));
 
       let data: ChatResponse | ChatErrorResponse | null = null;
+      const text = await response.text();
+      console.log('[ChatWidget] Response text (first 500 chars):', text.substring(0, 500));
+      
       try {
-        data = await response.json();
+        data = JSON.parse(text);
       } catch (parseError) {
         console.error('[ChatWidget] Failed to parse response JSON:', parseError);
-        throw new Error('Invalid response from server');
+        console.error('[ChatWidget] Response was not JSON. Full response:', text.substring(0, 1000));
+        throw new Error('Invalid response from server. The API may not be configured correctly.');
       }
 
       if (!response.ok) {
