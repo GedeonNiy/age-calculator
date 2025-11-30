@@ -13,7 +13,7 @@ export interface ToolResult {
  * Format tool result in the standard short format
  * This is the format the AI should use for all calculation results
  */
-export function formatToolResult(title: string, lines: string[], toolUrl: string): string {
+export function formatToolResult(_title: string, lines: string[], toolUrl: string): string {
   const bulletPoints = lines.map(line => `• ${line}`).join('\n');
   return [
     'Here are your results:',

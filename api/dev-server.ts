@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Root route - helpful message
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({
     message: 'Smart Tools Hub API Server',
     endpoints: {
