@@ -26,14 +26,13 @@ export const CATEGORY_ICONS: Record<string, string> = {
   'health': '⚖️',
   'education': '🎓',
   'academic-tools': '📚',
-  'other': '🧰',
 };
 
 export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: 'date-time',
     title: 'Date & Time',
-    description: 'Calculators for age, dates, and timelines.',
+    description: 'Date & Time tools help users calculate ages, find differences between dates, and track important timelines. These calculators are essential for official forms, planning events, tracking milestones, and satisfying curiosity about time-related questions. Perfect for students, professionals, and families who need accurate date calculations.',
     tools: [
       {
         name: 'Age Calculator',
@@ -58,7 +57,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: 'finance',
     title: 'Finance',
-    description: 'Loans, interest, tax, and money tools.',
+    description: 'Finance & Loan tools help users calculate mortgages, car loans, interest, and taxes using globally accepted formulas. These calculators are designed for individuals planning major purchases, managing debt, understanding investment growth, and preparing tax estimates. Essential for anyone making financial decisions or planning their financial future.',
     tools: [
       {
         name: 'Mortgage Calculator',
@@ -95,7 +94,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: 'health',
     title: 'Health',
-    description: 'Body metrics and health-related tools.',
+    description: 'Health tools provide accurate body metrics calculations to help users track their physical well-being. These calculators use established medical guidelines and formulas to provide reliable health assessments. Ideal for individuals monitoring their health, fitness enthusiasts, and anyone interested in understanding their body metrics.',
     tools: [
       {
         name: 'BMI Calculator',
@@ -108,7 +107,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: 'education',
     title: 'Education',
-    description: 'Student and learning helpers.',
+    description: 'Education tools assist students in calculating academic performance metrics like GPA using standard grading systems. These calculators help students track their progress, plan their studies, and understand their academic standing. Perfect for students at all levels who need to manage their grades and academic achievements.',
     tools: [
       {
         name: 'GPA Calculator',
@@ -121,7 +120,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: 'academic-tools',
     title: 'Academic & Documents',
-    description: 'Powerful tools for students, teachers, and researchers.',
+    description: 'Academic & Document tools provide powerful utilities for writing improvement, text analysis, citation generation, grammar checking, and file conversion. These tools help students, teachers, researchers, and professionals create high-quality documents, check for plagiarism, convert between file formats, and improve their writing. Essential for anyone working with academic or professional documents.',
     tools: [
       {
         name: 'Plagiarism Checker',
@@ -185,14 +184,6 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
       },
     ],
   },
-  {
-    id: 'other',
-    title: 'Other Tools',
-    description: 'General tools and utilities. (More coming soon!)',
-    tools: [
-      // placeholder: no tools yet, but keep the section visible
-    ],
-  },
 ];
 
 /**
@@ -203,7 +194,8 @@ export function getAllTools(): Tool[] {
 }
 
 /**
- * Get popular tools (for navigation dropdown)
+ * Get popular tools (for navigation dropdown and home page)
+ * Limited to 4-6 tools for AdSense compliance
  */
 export const POPULAR_TOOLS: Tool[] = [
   {
@@ -229,6 +221,18 @@ export const POPULAR_TOOLS: Tool[] = [
     path: '/bmi-calculator',
     icon: '⚖️',
     description: 'Check your Body Mass Index.',
+  },
+  {
+    name: 'GPA Calculator',
+    path: '/gpa-calculator',
+    icon: '🎓',
+    description: 'Calculate your GPA from your grades.',
+  },
+  {
+    name: 'Grammar Checker',
+    path: '/grammar-checker',
+    icon: '✓',
+    description: 'AI-powered grammar and spelling checker for your text.',
   },
 ];
 

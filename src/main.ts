@@ -286,7 +286,7 @@ function renderToolsGrid(): void {
   // Clear existing content
   container.innerHTML = '';
 
-  TOOL_CATEGORIES.forEach((category, index) => {
+  TOOL_CATEGORIES.forEach((category) => {
     // Create accordion item
     const accordionItem = document.createElement('div');
     accordionItem.className = 'accordion-item';
@@ -296,7 +296,7 @@ function renderToolsGrid(): void {
     const accordionHeader = document.createElement('button');
     accordionHeader.type = 'button';
     accordionHeader.className = 'accordion-header';
-    accordionHeader.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
+    accordionHeader.setAttribute('aria-expanded', 'false'); // All collapsed by default
     accordionHeader.setAttribute('aria-controls', `accordion-content-${category.id}`);
 
     const headerContent = document.createElement('div');
@@ -313,14 +313,14 @@ function renderToolsGrid(): void {
     title.className = 'accordion-title';
     title.textContent = category.title;
 
-    const subtitle = document.createElement('p');
-    subtitle.className = 'accordion-subtitle';
-    // Create subtitle from tool names
-    const toolNames = category.tools.map(t => t.name).join(', ');
-    subtitle.textContent = toolNames || category.description;
+    // Add category description under title
+    const description = document.createElement('p');
+    description.className = 'accordion-description';
+    description.textContent = category.description;
+    description.style.cssText = 'margin-top: 0.5rem; color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5;';
 
     headerText.appendChild(title);
-    headerText.appendChild(subtitle);
+    headerText.appendChild(description);
     headerContent.appendChild(icon);
     headerContent.appendChild(headerText);
 
@@ -335,7 +335,7 @@ function renderToolsGrid(): void {
     const accordionContent = document.createElement('div');
     accordionContent.className = 'accordion-content';
     accordionContent.id = `accordion-content-${category.id}`;
-    accordionContent.style.display = index === 0 ? 'block' : 'none';
+    accordionContent.style.display = 'none'; // All collapsed by default
 
     const toolsContainer = document.createElement('div');
     toolsContainer.className = 'tools-in-category';
