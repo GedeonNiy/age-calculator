@@ -124,19 +124,16 @@ export const SEO_CONFIG: Record<string, SEOData> = {
     title: 'Privacy Policy – Smart Tools Hub',
     description: 'Read how Smart Tools Hub handles data, cookies, and user privacy.',
     path: '/privacy',
-    noindex: true,
   },
   'view-terms': {
     title: 'Terms of Use – Smart Tools Hub',
     description: 'Review the terms and conditions for using Smart Tools Hub and its free calculators.',
     path: '/terms',
-    noindex: true,
   },
   'view-contact': {
     title: 'Contact – Smart Tools Hub',
     description: 'Contact Smart Tools Hub with questions, feedback, or requests for new tools.',
     path: '/contact',
-    noindex: true,
   },
 };
 

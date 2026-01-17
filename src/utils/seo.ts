@@ -30,7 +30,7 @@ export function updateStructuredData(): void {
     'sameAs': [],
     'contactPoint': {
       '@type': 'ContactPoint',
-      'email': 'info@smartagetools.com',
+      'email': 'support@smartagetools.com',
       'contactType': 'Customer Service'
     }
   };

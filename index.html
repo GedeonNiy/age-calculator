@@ -5,6 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Calculate your age and date differences easily with our free online calculators. Find out your exact age in years, months, and days, or calculate the difference between any two dates." />
+    <!-- AdSense Meta Tag - Replace with your actual publisher ID after approval -->
+    <!-- <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXX"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,80 +18,419 @@
       <header class="site-header">
         <div class="header-content">
           <div class="logo">
-            <h1 class="site-title">Smart Age & Date Tools</h1>
+            <h1 class="site-title">Smart Tools Hub</h1>
           </div>
-          <nav class="main-nav">
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="main-nav" id="main-nav">
             <button type="button" class="nav-link" data-view="view-home">Home</button>
+            <div class="nav-dropdown">
+              <button type="button" class="nav-link nav-dropdown-toggle" id="tools-dropdown-toggle">
+                Tools <span class="dropdown-arrow">▼</span>
+              </button>
+              <div class="nav-dropdown-menu" id="tools-dropdown-menu">
+                <a href="#" class="dropdown-item" data-view="view-tools">All Tools</a>
+                <a href="#" class="dropdown-item" data-view="view-age-calculator">Age Calculator</a>
+                <a href="#" class="dropdown-item" data-view="view-date-difference">Date Difference</a>
+                <a href="#" class="dropdown-item" data-view="view-bmi-calculator">BMI Calculator</a>
+                <a href="#" class="dropdown-item" data-view="view-mortgage-calculator">Mortgage Calculator</a>
+              </div>
+            </div>
             <button type="button" class="nav-link" data-view="view-about">About</button>
-            <button type="button" class="nav-link" data-view="view-privacy">Privacy Policy</button>
             <button type="button" class="nav-link" data-view="view-contact">Contact</button>
+            <button type="button" class="nav-link" data-view="view-privacy">Privacy</button>
+            <button type="button" class="nav-link" data-view="view-terms">Terms</button>
           </nav>
         </div>
       </header>
 
-      <!-- Home View (Calculators) -->
+      <!-- Home View -->
       <section id="view-home" class="view">
         <main>
-          <div class="calculators-container">
-            <!-- Age Calculator Section -->
-            <section class="calculator-card">
-              <h2>Age Calculator</h2>
-              <div class="form-group">
-                <label for="dob-input">Date of birth</label>
-                <input type="date" id="dob-input" name="dob" />
-              </div>
-              <button type="button" id="calculate-age-btn">Calculate Age</button>
-              <div id="age-result" class="result"></div>
-            </section>
+          <!-- Hero Section -->
+          <section class="hero-section">
+            <h1 class="hero-title">Smart Tools Hub</h1>
+            <p class="hero-subtitle">Free online calculators and tools for dates, finance, and health</p>
+            <p class="hero-description">Accurate, easy-to-use calculators to help you with everyday calculations and planning.</p>
+          </section>
 
-            <!-- Date Difference Calculator Section -->
+          <!-- Tools Grid -->
+          <section class="home-tools-section">
+            <h2 class="section-title">Our Tools</h2>
+            <div class="home-tools-grid">
+              <a href="/age-calculator" class="home-tool-card" data-view="view-age-calculator">
+                <div class="tool-card-icon">🎂</div>
+                <h3 class="tool-card-title">Age Calculator</h3>
+                <p class="tool-card-description">Calculate your exact age in years, months, and days from your date of birth.</p>
+                <span class="tool-card-link">Use Calculator →</span>
+              </a>
+              
+              <a href="/date-difference" class="home-tool-card" data-view="view-date-difference">
+                <div class="tool-card-icon">📆</div>
+                <h3 class="tool-card-title">Date Difference</h3>
+                <p class="tool-card-description">Calculate the exact time difference between any two dates in multiple formats.</p>
+                <span class="tool-card-link">Use Calculator →</span>
+              </a>
+              
+              <a href="/bmi-calculator" class="home-tool-card" data-view="view-bmi-calculator">
+                <div class="tool-card-icon">⚖️</div>
+                <h3 class="tool-card-title">BMI Calculator</h3>
+                <p class="tool-card-description">Calculate your Body Mass Index and see which weight category you fall into.</p>
+                <span class="tool-card-link">Use Calculator →</span>
+              </a>
+              
+              <a href="/mortgage-calculator" class="home-tool-card" data-view="view-mortgage-calculator">
+                <div class="tool-card-icon">🏠</div>
+                <h3 class="tool-card-title">Mortgage Calculator</h3>
+                <p class="tool-card-description">Calculate monthly mortgage payments, total interest, and see how extra payments save money.</p>
+                <span class="tool-card-link">Use Calculator →</span>
+              </a>
+            </div>
+          </section>
+        </main>
+      </section>
+
+      <!-- Tools Listing View -->
+      <section id="view-tools" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>All Tools</h1>
+            <p class="page-description">Browse our complete collection of free online calculators organized by category.</p>
+          </div>
+          <div class="tools-section">
+            <div id="tools-grid-container" class="tools-grid">
+              <!-- Tools will be dynamically rendered here -->
+            </div>
+          </div>
+        </main>
+      </section>
+
+      <!-- Age Calculator View (Separate Page) -->
+      <section id="view-age-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Age Calculator</h1>
+            <p class="page-description">Calculate your exact age in years, months, and days from your date of birth to today.</p>
+          </div>
+          <div class="calculator-page-container">
             <section class="calculator-card">
-              <h2>Date Difference Calculator</h2>
               <div class="form-group">
-                <label for="start-date-input">Start date</label>
-                <input type="date" id="start-date-input" name="start-date" />
+                <label for="age-dob-input">Date of birth</label>
+                <input type="date" id="age-dob-input" name="dob" />
               </div>
-              <div class="form-group">
-                <label for="end-date-input">End date</label>
-                <input type="date" id="end-date-input" name="end-date" />
-              </div>
-              <button type="button" id="calculate-difference-btn">Calculate Difference</button>
-              <div id="difference-result" class="result"></div>
+              <button type="button" id="age-calculate-btn">Calculate Age</button>
+              <div id="age-page-result" class="result"></div>
             </section>
           </div>
-
-          <!-- SEO Content Section -->
           <section class="content-section">
-            <h2>What is an Age Calculator?</h2>
-            <p>
-              An age calculator is a useful tool that helps you determine your exact age or the age of someone else based on their date of birth. It calculates the precise number of years, months, and days that have passed since the birth date. This tool is particularly helpful for various purposes such as verifying age for legal requirements, planning events, tracking milestones, or simply satisfying curiosity about how old you are down to the exact day.
-            </p>
-            <p>
-              Our age calculator uses accurate date calculations to provide you with a detailed breakdown of your age. Simply enter your date of birth, and the calculator will instantly show you your age in years, months, and days from that date to today. The calculation accounts for leap years and varying month lengths to ensure accuracy.
-            </p>
+            <h2>How to Use the Age Calculator</h2>
+            <p>Using our age calculator is simple and straightforward. Enter your date of birth in the field above, and click the "Calculate Age" button. The calculator will instantly display your exact age broken down into years, months, and days from your birth date to today's date. This precise calculation accounts for leap years and varying month lengths to ensure complete accuracy.</p>
+            
+            <h3>What is an Age Calculator?</h3>
+            <p>An age calculator is a digital tool designed to determine your exact age or the age of another person based on their date of birth. Unlike simple year-based calculations, an age calculator provides a detailed breakdown showing precisely how many years, months, and days have elapsed since the birth date. This level of precision is essential for various legal, medical, and personal purposes where exact age matters.</p>
+            
+            <h3>Why Use an Age Calculator?</h3>
+            <p>There are numerous situations where knowing your exact age is important. Legal requirements often demand precise age verification for activities like voting, driving, employment, or entering into contracts. Medical professionals use exact age calculations for proper diagnosis and treatment planning. Parents track their children's development milestones. Event planners need exact ages for birthday celebrations. Researchers and demographers use age data for statistical analysis. Our calculator handles all these needs with precision and ease.</p>
+            
+            <h3>How Does It Work?</h3>
+            <p>Our age calculator uses sophisticated date arithmetic algorithms that account for all calendar complexities. It correctly handles leap years (including century years that are not leap years), months with different numbers of days (28, 29, 30, or 31 days), and ensures accurate calculations across different calendar periods. The algorithm calculates the difference between your birth date and today's date, then breaks it down into years, months, and remaining days for a complete picture of your age.</p>
+            
+            <h3>Common Use Cases</h3>
+            <ul class="feature-list">
+              <li><strong>Legal Verification:</strong> Verify age for legal requirements, contracts, or age-restricted activities</li>
+              <li><strong>Medical Purposes:</strong> Calculate exact age for medical records, prescriptions, or treatment planning</li>
+              <li><strong>Event Planning:</strong> Determine exact age for birthday parties, anniversaries, or milestone celebrations</li>
+              <li><strong>Personal Records:</strong> Track your age or family members' ages for personal documentation</li>
+              <li><strong>Educational:</strong> Calculate age for school enrollment, grade placement, or educational milestones</li>
+            </ul>
+            
+            <h3>Accuracy and Reliability</h3>
+            <p>Our age calculator is designed with precision in mind. It accounts for leap years, including the special rules for century years (years divisible by 100 are not leap years unless they're also divisible by 400). It correctly handles months with varying lengths and ensures accurate day calculations. The results are reliable and suitable for both personal and professional use, providing you with confidence in the accuracy of your age calculation.</p>
+            
+            <h3>Frequently Asked Questions</h3>
+            <p><strong>Can I calculate age for a future date?</strong> No, the age calculator is designed to calculate age from a past birth date to today. If you enter a future date, you'll receive an error message.</p>
+            <p><strong>Does it account for leap years?</strong> Yes, our calculator correctly handles all leap year scenarios, including century years.</p>
+            <p><strong>How precise is the calculation?</strong> The calculator provides accuracy down to the exact day, accounting for all calendar complexities.</p>
+          </section>
+        </main>
+      </section>
 
-            <h2>What is a Date Difference Calculator?</h2>
-            <p>
-              A date difference calculator is a practical tool that computes the time span between any two dates. Whether you need to know how many days until a deadline, how long a project has been running, or the duration between two significant events, this calculator provides you with the answer in multiple formats including days, weeks, months, and years.
-            </p>
-            <p>
-              This calculator is invaluable for project planning, event organization, tracking durations, calculating interest periods, or any situation where you need to know the exact time difference between two dates. It handles all the complexities of calendar calculations, including leap years and months with different numbers of days, to give you accurate results.
-            </p>
+      <!-- Date Difference Calculator View (Separate Page) -->
+      <section id="view-date-difference" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Date Difference Calculator</h1>
+            <p class="page-description">Calculate the exact time difference between any two dates in years, months, days, weeks, and total days.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <div class="form-group">
+                <label for="diff-start-date-input">Start date</label>
+                <input type="date" id="diff-start-date-input" name="start-date" />
+              </div>
+              <div class="form-group">
+                <label for="diff-end-date-input">End date</label>
+                <input type="date" id="diff-end-date-input" name="end-date" />
+              </div>
+              <button type="button" id="diff-calculate-btn">Calculate Difference</button>
+              <div id="diff-page-result" class="result"></div>
+            </section>
+          </div>
+          <section class="content-section">
+            <h2>How to Use the Date Difference Calculator</h2>
+            <p>Our date difference calculator is easy to use. Simply select your start date and end date using the date pickers above, then click "Calculate Difference". The calculator will instantly display the time span between the two dates in multiple formats: years, months, days, weeks, and total days. This comprehensive breakdown helps you understand the duration in various time units.</p>
+            
+            <h3>What is a Date Difference Calculator?</h3>
+            <p>A date difference calculator is a practical tool that computes the exact time span between any two dates. Whether you need to know how many days until a deadline, how long a project has been running, or the duration between two significant life events, this calculator provides accurate results in multiple time formats. It's an essential tool for project management, event planning, financial calculations, and personal record-keeping.</p>
+            
+            <h3>Why Calculate Date Differences?</h3>
+            <p>Understanding the time between dates is crucial for many aspects of daily life and business. Project managers use it to track project timelines and deadlines. Financial professionals calculate interest periods and loan durations. Event planners determine time until events or between milestones. Researchers analyze time spans in studies. Individuals track personal milestones, anniversaries, or countdowns to important dates. Our calculator handles all these scenarios with precision.</p>
+            
+            <h3>How It Works</h3>
+            <p>Our date difference calculator uses advanced date arithmetic to accurately compute the time between two dates. It calculates the total number of days between the dates, then breaks this down into years, months, and remaining days. The algorithm accounts for leap years, months with different lengths, and ensures accurate calculations regardless of the date range. It also provides the total in weeks for easier understanding of longer durations.</p>
+            
+            <h3>Common Applications</h3>
+            <ul class="feature-list">
+              <li><strong>Project Management:</strong> Calculate project duration, track deadlines, and measure time to completion</li>
+              <li><strong>Financial Planning:</strong> Determine loan periods, investment durations, or interest calculation periods</li>
+              <li><strong>Event Planning:</strong> Countdown to events, calculate time between milestones, or plan anniversary celebrations</li>
+              <li><strong>Personal Records:</strong> Track time since important events, calculate age differences, or measure personal milestones</li>
+              <li><strong>Business Operations:</strong> Calculate contract durations, warranty periods, or service intervals</li>
+            </ul>
+            
+            <h3>Understanding the Results</h3>
+            <p>The calculator provides results in multiple formats to give you a complete picture. Years show the full years between dates, months show additional months beyond full years, and days show the remaining days. The total days count gives you the absolute number of days, while weeks provide a convenient way to understand longer durations. This multi-format approach ensures you have the information in the format most useful for your specific need.</p>
+            
+            <h3>Accuracy and Precision</h3>
+            <p>Our calculator is designed for maximum accuracy. It correctly handles leap years, including the special rules for century years. It accounts for months with 28, 29, 30, or 31 days. The calculations are precise to the day, making the tool suitable for both personal and professional applications where accuracy matters.</p>
+          </section>
+        </main>
+      </section>
 
-            <h3>How accurate are these calculators?</h3>
-            <p>
-              Our calculators use precise date arithmetic that accounts for leap years, varying month lengths (28-31 days), and all calendar complexities. The results are accurate to the day, making them suitable for both personal and professional use.
-            </p>
+      <!-- BMI Calculator View -->
+      <section id="view-bmi-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>BMI Calculator</h1>
+            <p class="page-description">Calculate your BMI (Body Mass Index) using height and weight, and see which weight category you fall into.</p>
+          </div>
+          <div class="calculator-page-container">
+            <section class="calculator-card">
+              <div class="form-group">
+                <label>Unit System:</label>
+                <div class="radio-group">
+                  <label>
+                    <input type="radio" id="bmi-unit-metric" name="bmi-unit" value="metric" checked>
+                    Metric (kg, cm)
+                  </label>
+                  <label>
+                    <input type="radio" id="bmi-unit-imperial" name="bmi-unit" value="imperial">
+                    Imperial (lbs, ft/in)
+                  </label>
+                </div>
+              </div>
+              <div id="bmi-metric-inputs">
+                <div class="form-group">
+                  <label for="bmi-weight">Weight (kg)</label>
+                  <input type="number" id="bmi-weight" min="0" step="0.1" />
+                </div>
+                <div class="form-group">
+                  <label for="bmi-height-cm">Height (cm)</label>
+                  <input type="number" id="bmi-height-cm" min="0" step="0.1" />
+                </div>
+              </div>
+              <div id="bmi-imperial-inputs" style="display: none;">
+                <div class="form-group">
+                  <label for="bmi-weight-imperial">Weight (lbs)</label>
+                  <input type="number" id="bmi-weight-imperial" min="0" step="0.1" />
+                </div>
+                <div class="form-group">
+                  <label>Height</label>
+                  <div style="display: flex; gap: 10px;">
+                    <input type="number" id="bmi-height-feet" placeholder="Feet" min="0" max="8" />
+                    <input type="number" id="bmi-height-inches" placeholder="Inches" min="0" max="11" />
+                  </div>
+                </div>
+              </div>
+              <button type="button" id="bmi-calculate-btn">Calculate BMI</button>
+              <div id="bmi-page-result" class="result"></div>
+            </section>
+          </div>
+          <section class="content-section">
+            <h2>Understanding BMI (Body Mass Index)</h2>
+            <p>BMI, or Body Mass Index, is a widely used screening tool that provides a numerical value based on a person's height and weight. It's calculated by dividing weight in kilograms by the square of height in meters, or using pounds and inches with a conversion factor. While BMI doesn't directly measure body fat, it's a useful indicator of body composition and potential health risks associated with weight.</p>
+            
+            <h3>How to Use This BMI Calculator</h3>
+            <p>Our BMI calculator is simple to use. First, select your preferred unit system - metric (kilograms and centimeters) or imperial (pounds, feet, and inches). Enter your weight and height in the appropriate fields. For imperial measurements, enter your height in feet and inches separately. Click "Calculate BMI" and the calculator will instantly display your BMI value along with your weight category classification.</p>
+            
+            <h3>BMI Categories Explained</h3>
+            <p>The World Health Organization (WHO) and other health organizations have established standard BMI categories to help classify weight status:</p>
+            <ul class="feature-list">
+              <li><strong>Underweight:</strong> BMI below 18.5 - May indicate insufficient body weight for optimal health</li>
+              <li><strong>Normal weight:</strong> BMI 18.5 to 24.9 - Generally considered a healthy weight range</li>
+              <li><strong>Overweight:</strong> BMI 25 to 29.9 - May indicate excess body weight</li>
+              <li><strong>Obesity Class I:</strong> BMI 30 to 34.9 - Moderate obesity</li>
+              <li><strong>Obesity Class II:</strong> BMI 35 to 39.9 - Severe obesity</li>
+              <li><strong>Obesity Class III:</strong> BMI 40 or higher - Extreme or morbid obesity</li>
+            </ul>
+            
+            <h3>Why BMI Matters for Health</h3>
+            <p>BMI is an important health indicator because it correlates with various health outcomes. Research has shown that BMI outside the normal range (both too high and too low) can be associated with increased health risks. High BMI is linked to conditions such as heart disease, type 2 diabetes, high blood pressure, certain cancers, sleep apnea, and joint problems. Low BMI may indicate malnutrition, eating disorders, or other underlying health issues. However, BMI is just one tool in assessing health and should be used alongside other measurements and professional medical advice.</p>
+            
+            <h3>Understanding BMI Limitations</h3>
+            <p>While BMI is a useful screening tool, it has important limitations. BMI doesn't distinguish between muscle mass and fat mass. Athletes and individuals with high muscle mass may have a high BMI despite having low body fat and being in excellent physical condition. Similarly, older adults may have a normal BMI but higher body fat percentage due to age-related muscle loss. BMI also doesn't account for bone density, body frame size, or fat distribution (where fat is stored on the body). For these reasons, BMI should be considered alongside other health indicators like waist circumference, body composition analysis, and overall fitness level.</p>
+            
+            <h3>When to Consult a Healthcare Professional</h3>
+            <p>If your BMI falls outside the normal range, or if you have concerns about your weight and health, it's important to consult with a healthcare professional. A doctor or registered dietitian can provide personalized guidance based on your individual health status, medical history, and lifestyle factors. They can help you develop a safe and effective plan for achieving and maintaining a healthy weight if needed.</p>
+            
+            <h3>Using BMI for Health Goals</h3>
+            <p>BMI can be a useful starting point for setting health and fitness goals. If your BMI indicates you're outside the healthy range, working with healthcare professionals to develop a gradual, sustainable approach to weight management is recommended. This typically involves a combination of balanced nutrition, regular physical activity, adequate sleep, and stress management. Remember that small, consistent changes over time are more effective and sustainable than drastic measures.</p>
+          </section>
+        </main>
+      </section>
 
-            <h3>Can I calculate age for dates in the future?</h3>
-            <p>
-              The age calculator is designed to calculate age from a date of birth to the current date. If you enter a future date of birth, the calculator will show an error message, as age cannot be calculated for dates that haven't occurred yet.
-            </p>
-
-            <h3>What if the end date is before the start date?</h3>
-            <p>
-              For the date difference calculator, the end date must be equal to or after the start date. If you enter an end date that is before the start date, you'll receive an error message prompting you to correct the dates. This ensures logical and meaningful results.
-            </p>
+      <!-- Mortgage Calculator View -->
+      <section id="view-mortgage-calculator" class="view view-hidden">
+        <main>
+          <div class="page-header">
+            <h1>Mortgage Calculator</h1>
+            <p class="page-description">Calculate your monthly mortgage payment, total interest, and see how extra payments can save you money.</p>
+          </div>
+          <div class="mortgage-calculator-container">
+            <div class="mortgage-inputs-section">
+              <h2>Mortgage Details</h2>
+              <form id="mortgage-form" class="mortgage-form">
+                <div class="form-group">
+                  <label for="mortgage-home-price">Home Price</label>
+                  <input type="number" id="mortgage-home-price" value="350000" min="0" step="1000" />
+                </div>
+                <div class="form-group">
+                  <label>Down Payment</label>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" id="down-payment-amount" name="down-payment-type" value="amount" />
+                      Fixed Amount
+                    </label>
+                    <label>
+                      <input type="radio" id="down-payment-percent" name="down-payment-type" value="percentage" checked />
+                      Percentage
+                    </label>
+                  </div>
+                  <input type="number" id="mortgage-down-amount" value="70000" min="0" step="1000" style="display: none;" />
+                  <input type="number" id="mortgage-down-percent" value="20" min="0" max="100" step="0.1" />
+                </div>
+                <div class="form-group">
+                  <label for="mortgage-loan-term">Loan Term (Years)</label>
+                  <select id="mortgage-loan-term">
+                    <option value="10">10 years</option>
+                    <option value="15">15 years</option>
+                    <option value="20">20 years</option>
+                    <option value="25">25 years</option>
+                    <option value="30" selected>30 years</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="mortgage-interest-rate">Annual Interest Rate (APR %)</label>
+                  <input type="number" id="mortgage-interest-rate" value="6.5" min="0" max="30" step="0.01" />
+                </div>
+                <div class="form-group">
+                  <label>Property Tax (Annual)</label>
+                  <div class="radio-group">
+                    <label>
+                      <input type="radio" id="property-tax-percent" name="property-tax-type" value="percent" checked />
+                      Percent of Home Price
+                    </label>
+                    <label>
+                      <input type="radio" id="property-tax-amount" name="property-tax-type" value="amount" />
+                      Fixed Amount
+                    </label>
+                  </div>
+                  <input type="number" id="mortgage-tax-percent" value="1.2" min="0" step="0.1" />
+                  <input type="number" id="mortgage-tax-amount" value="4200" min="0" step="100" style="display: none;" />
+                </div>
+                <div class="form-group">
+                  <label for="mortgage-insurance">Homeowner's Insurance (Annual)</label>
+                  <input type="number" id="mortgage-insurance" value="1200" min="0" step="100" />
+                </div>
+                <div class="form-group">
+                  <label>
+                    <input type="checkbox" id="mortgage-include-pmi" checked />
+                    Include PMI (Private Mortgage Insurance)
+                  </label>
+                  <input type="number" id="mortgage-pmi-percent" value="0.5" min="0" step="0.1" placeholder="PMI % per year" />
+                  <small>PMI applies when down payment is less than 20%</small>
+                </div>
+                <div class="form-group">
+                  <label for="mortgage-hoa">HOA Fees (Monthly)</label>
+                  <input type="number" id="mortgage-hoa" value="0" min="0" step="10" />
+                </div>
+                <div class="form-group">
+                  <label for="mortgage-extra-payment">Extra Principal Payment (Monthly)</label>
+                  <input type="number" id="mortgage-extra-payment" value="0" min="0" step="50" />
+                  <small>Additional amount paid toward principal each month</small>
+                </div>
+                <button type="button" id="mortgage-calculate-btn">Calculate Mortgage</button>
+              </form>
+            </div>
+            <div class="mortgage-results-section">
+              <h2>Results</h2>
+              <div class="results-cards">
+                <div class="result-card">
+                  <h3>Monthly P&I Payment</h3>
+                  <p class="result-value" id="mortgage-result-monthly-pi">$0.00</p>
+                  <small>Principal + Interest only</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Monthly Payment</h3>
+                  <p class="result-value" id="mortgage-result-total-monthly">$0.00</p>
+                  <small>Including taxes, insurance, PMI, and HOA</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Interest</h3>
+                  <p class="result-value" id="mortgage-result-total-interest">$0.00</p>
+                  <small>Over loan term</small>
+                </div>
+                <div class="result-card">
+                  <h3>Total Cost</h3>
+                  <p class="result-value" id="mortgage-result-total-cost">$0.00</p>
+                  <small>Principal + Interest</small>
+                </div>
+              </div>
+              <div id="mortgage-extra-results" class="extra-payment-results" style="display: none;"></div>
+              <div id="mortgage-schedule-container" class="schedule-container"></div>
+            </div>
+          </div>
+          <section class="content-section">
+            <h2>Understanding Your Mortgage Payment</h2>
+            <p>A mortgage payment is more complex than many people realize. It consists of several components that work together to determine your total monthly housing cost. The principal is the original amount you borrow to purchase the home. Interest is the cost of borrowing money, calculated as a percentage of the remaining loan balance. Property taxes are assessed by local governments and typically paid monthly through an escrow account. Homeowner's insurance protects your property and is usually required by lenders. PMI (Private Mortgage Insurance) is required when your down payment is less than 20% of the home price. HOA (Homeowners Association) fees apply if you live in a community with shared amenities and services.</p>
+            
+            <h3>How Mortgage Payments Work</h3>
+            <p>Mortgage payments are calculated using an amortization formula that ensures your loan is paid off over the specified term. In the early years of your mortgage, a larger portion of each payment goes toward interest, while a smaller portion reduces the principal. As time passes and the principal balance decreases, more of each payment goes toward principal and less toward interest. This is why making extra principal payments early in the loan term can have such a significant impact on total interest paid.</p>
+            
+            <h3>Key Mortgage Terms Explained</h3>
+            <ul class="feature-list">
+              <li><strong>Principal:</strong> The original amount you borrow to purchase the home. This is the base amount you'll repay over the loan term.</li>
+              <li><strong>Interest Rate (APR):</strong> The annual percentage rate you pay on the loan. This determines how much interest you'll pay over the life of the loan.</li>
+              <li><strong>Down Payment:</strong> The upfront amount you pay toward the home purchase. A larger down payment reduces your loan amount and may eliminate PMI.</li>
+              <li><strong>Loan Term:</strong> The length of time you have to repay the loan, typically 15, 20, or 30 years. Shorter terms mean higher monthly payments but less total interest.</li>
+              <li><strong>PMI (Private Mortgage Insurance):</strong> Insurance that protects the lender if you default. Required when down payment is less than 20%.</li>
+              <li><strong>Escrow:</strong> An account where your lender holds funds for property taxes and insurance, paying them on your behalf.</li>
+            </ul>
+            
+            <h3>The Power of Extra Payments</h3>
+            <p>Making extra principal payments can dramatically reduce the total interest you pay over the life of your loan and shorten your loan term. For example, adding just $100 per month to a $300,000, 30-year mortgage at 6.5% interest can save over $50,000 in interest and pay off the loan more than 5 years early. The earlier you make extra payments, the greater the impact, because you're reducing the principal balance while interest rates are still high. Even small, consistent extra payments can make a significant difference over time.</p>
+            
+            <h3>Understanding Total Monthly Payment</h3>
+            <p>Your total monthly mortgage payment includes more than just principal and interest. Property taxes vary by location and are typically 1-2% of the home's value annually. Homeowner's insurance costs depend on factors like home value, location, and coverage level. PMI typically costs 0.5-1% of the loan amount annually until you reach 20% equity. HOA fees vary widely based on community amenities. Understanding all these components helps you budget accurately and make informed decisions about your home purchase.</p>
+            
+            <h3>Using This Calculator Effectively</h3>
+            <p>Our mortgage calculator helps you understand the full cost of homeownership. Enter your home price, down payment amount or percentage, loan term, and interest rate. Include property taxes, insurance, PMI if applicable, and HOA fees to see your complete monthly payment. Try different scenarios - see how a larger down payment affects your payment, how different loan terms compare, or how extra payments can save money. This information empowers you to make informed decisions and find a mortgage that fits your budget and financial goals.</p>
+            
+            <h3>Planning for Homeownership</h3>
+            <p>Before purchasing a home, it's important to understand all the costs involved. Beyond the mortgage payment, budget for maintenance, repairs, utilities, and potential increases in property taxes and insurance. Use this calculator to ensure your total housing costs don't exceed 28-30% of your gross monthly income, a common guideline for financial stability. Consider your long-term financial goals and how homeownership fits into your overall financial plan.</p>
           </section>
         </main>
       </section>
@@ -142,8 +483,50 @@
         </div>
       </section>
 
+      <!-- Terms View -->
+      <section id="view-terms" class="view view-hidden">
+        <div class="content-page">
+          <h1>Terms & Conditions</h1>
+          <p>
+            Welcome to Smart Tools Hub. By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.
+          </p>
+          <h2>Use License</h2>
+          <p>
+            Permission is granted to temporarily use Smart Tools Hub for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+          </p>
+          <ul>
+            <li>Modify or copy the materials</li>
+            <li>Use the materials for any commercial purpose or for any public display</li>
+            <li>Attempt to reverse engineer any software contained on the website</li>
+            <li>Remove any copyright or other proprietary notations from the materials</li>
+          </ul>
+          <h2>Disclaimer</h2>
+          <p>
+            The materials on Smart Tools Hub are provided on an 'as is' basis. Smart Tools Hub makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+          </p>
+          <h2>Limitations</h2>
+          <p>
+            In no event shall Smart Tools Hub or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Smart Tools Hub, even if Smart Tools Hub or a Smart Tools Hub authorized representative has been notified orally or in writing of the possibility of such damage.
+          </p>
+          <h2>Accuracy of Materials</h2>
+          <p>
+            The materials appearing on Smart Tools Hub could include technical, typographical, or photographic errors. Smart Tools Hub does not warrant that any of the materials on its website are accurate, complete, or current. Smart Tools Hub may make changes to the materials contained on its website at any time without notice.
+          </p>
+          <h2>Links</h2>
+          <p>
+            Smart Tools Hub has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Smart Tools Hub of the site. Use of any such linked website is at the user's own risk.
+          </p>
+          <h2>Modifications</h2>
+          <p>
+            Smart Tools Hub may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.
+          </p>
+          <p>
+            <strong>Last updated:</strong> January 2025
+          </p>
+        </div>
+      </section>
+
       <!-- Contact View -->
-      <section id="view-contact" class="view view-hidden">
         <div class="content-page">
           <h1>Contact</h1>
           <p>
@@ -155,7 +538,7 @@
               You can reach us via email at:
             </p>
             <p class="contact-email">
-              <a href="mailto:gedeon.niy@gmail.com">gedeon.niy@gmail.com</a>
+              <a href="mailto:support@smartagetools.com">support@smartagetools.com</a>
             </p>
             <p>
               We aim to respond to all inquiries within 24-48 hours during business days.
@@ -188,31 +571,33 @@
       <!-- Footer -->
       <footer class="site-footer">
         <div class="footer-content">
-          <div class="footer-section">
-            <h3>Smart Tools Hub</h3>
-            <p>Free online calculators and tools for dates, finance, health, education, and document management.</p>
+          <div class="footer-section footer-brand">
+            <h3 class="footer-title">Smart Tools Hub</h3>
+            <p class="footer-description">Free online calculators and tools for dates, finance, health, education, and document management.</p>
+            <p class="footer-email">
+              <a href="mailto:support@smartagetools.com" class="footer-email-link">support@smartagetools.com</a>
+            </p>
           </div>
-          <div class="footer-section">
-            <h4>Tools</h4>
-            <ul>
-              <li><a href="#" data-view="view-tools">All Tools</a></li>
-              <li><a href="#" data-view="view-age-calculator">Age Calculator</a></li>
-              <li><a href="#" data-view="view-mortgage-calculator">Mortgage Calculator</a></li>
-              <li><a href="#" data-view="view-bmi-calculator">BMI Calculator</a></li>
+          <nav class="footer-section footer-nav">
+            <h4 class="footer-nav-title">Links</h4>
+            <ul class="footer-nav-list">
+              <li><a href="#" class="footer-link" data-view="view-home">Home</a></li>
+              <li><a href="#" class="footer-link" data-view="view-about">About</a></li>
+              <li><a href="#" class="footer-link" data-view="view-contact">Contact</a></li>
+              <li><a href="#" class="footer-link" data-view="view-privacy">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link" data-view="view-terms">Terms of Use</a></li>
             </ul>
-          </div>
-          <div class="footer-section">
-            <h4>About</h4>
-            <ul>
-              <li><a href="#" data-view="view-about">About Us</a></li>
-              <li><a href="#" data-view="view-contact">Contact</a></li>
-              <li><a href="#" data-view="view-privacy">Privacy Policy</a></li>
-              <li><a href="#" data-view="view-terms">Terms of Use</a></li>
-            </ul>
-          </div>
+          </nav>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 Smart Tools Hub. All rights reserved. Free to use.</p>
+          <p class="footer-copyright">&copy; 2025 Smart Tools Hub. All rights reserved.</p>
+          <div class="footer-verification-links">
+            <a href="/sitemap.xml" class="footer-verification-link">Sitemap</a>
+            <span class="footer-verification-separator">•</span>
+            <a href="/robots.txt" class="footer-verification-link">Robots</a>
+            <span class="footer-verification-separator">•</span>
+            <a href="/ads.txt" class="footer-verification-link">Ads.txt</a>
+          </div>
         </div>
       </footer>
     </div>

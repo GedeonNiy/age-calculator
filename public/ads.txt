@@ -1,0 +1,7 @@
+# ads.txt file for Smart Tools Hub
+# Replace with your actual AdSense publisher ID when approved
+# Format: google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# 
+# For now, this file is a placeholder. Update after AdSense approval.
+# Instructions: https://support.google.com/adsense/answer/7532444
+
