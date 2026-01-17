@@ -5,9 +5,19 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from '../openaiClient.js';
+import { callOpenAI, type ChatMessage } from '../../src/server/openaiClient';
 
-const SYSTEM_PROMPT = `You are a grammar and spelling corrector. Return the corrected version of the text. Do not change the meaning. Do not add or remove sentences. Just fix grammar, spelling, punctuation, and basic word choice. Return ONLY the corrected text, with no explanations or commentary.`;
+const SYSTEM_PROMPT = `You are a grammar and spelling corrector. Return the corrected version of the text. Do not change the meaning. Do not add or remove sentences. Just fix grammar, spelling, punctuation, and basic word choice.
+
+Rules:
+- Fix all grammar errors
+- Correct spelling mistakes
+- Fix punctuation errors
+- Improve basic word choice if it's clearly wrong
+- Preserve the original meaning completely
+- Do NOT rewrite or restructure sentences unless grammatically necessary
+- Do NOT add new information
+- Return ONLY the corrected text, no explanations or notes`;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -21,11 +31,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Text is required' });
     }
 
-    const userMessage = `Correct the grammar, spelling, and punctuation in the following text:\n\n${text}`;
+    if (text.length > 10000) {
+      return res.status(400).json({ error: 'Text is too long. Maximum 10,000 characters.' });
+    }
 
     const messages: ChatMessage[] = [
       { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: userMessage },
+      { role: 'user', content: `Correct the grammar and spelling in this text:\n\n${text}` },
     ];
 
     const { reply } = await callOpenAI(messages);
@@ -40,3 +52,4 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 }
+

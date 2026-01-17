@@ -54,11 +54,11 @@ export function initPdfJpgConverter(): void {
       try {
         // Note: pdf-lib doesn't render PDFs to images
         // For a full implementation, you'd need pdf.js or a server-side solution
-        statusDiv.textContent = 'PDF to JPG conversion requires advanced rendering. This feature is in development.';
+        statusDiv.textContent = 'PDF to JPG conversion requires advanced PDF rendering capabilities that are not available in this browser-based tool. Please use the JPG to PDF feature to combine images into PDFs, or use dedicated PDF software for PDF to image conversion.';
         statusDiv.className = 'status-message error';
       } catch (error: any) {
         console.error('PDF to JPG error:', error);
-        statusDiv.textContent = 'Failed to convert PDF. Please try again.';
+        statusDiv.textContent = 'PDF to JPG conversion is not available in this browser-based tool. Please use the JPG to PDF feature or dedicated PDF software.';
         statusDiv.className = 'status-message error';
       }
     } else {

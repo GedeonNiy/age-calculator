@@ -7,7 +7,8 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from './openaiClient.js';
+import { callOpenAI, type ChatMessage } from '../src/server/openaiClient';
+import { TOOL_LINKS } from './toolRegistry';
 
 // System prompt for Smart Tools Assistant
 const SYSTEM_PROMPT = `You are **Dyla**, the friendly AI assistant for **Smart Tools Hub** at https://smartagetools.com.
@@ -464,18 +465,15 @@ interface ChatRequest {
   toolSlug?: string | null;
 }
 
-export default async function handler(
+export async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
   // Log function invocation
-  console.log('[/api/chat] ========== FUNCTION INVOKED ==========');
+  console.log('[/api/chat] Function invoked');
   console.log('[/api/chat] Method:', req.method);
-  console.log('[/api/chat] URL:', req.url);
   console.log('[/api/chat] Environment check - OPENAI_API_KEY present:', !!process.env.OPENAI_API_KEY);
   console.log('[/api/chat] Environment check - OPENAI_API_KEY length:', process.env.OPENAI_API_KEY?.length || 0);
-  console.log('[/api/chat] Environment check - NODE_ENV:', process.env.NODE_ENV);
-  console.log('[/api/chat] Environment check - callOpenAI function exists:', typeof callOpenAI === 'function');
 
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -564,25 +562,33 @@ export default async function handler(
     console.error('[/api/chat] Error name:', error?.name);
     console.error('[/api/chat] Error constructor:', error?.constructor?.name);
 
-    // Ensure we haven't already sent a response
-    if (res.headersSent) {
-      console.error('[/api/chat] Response already sent, cannot send error response');
-      return;
-    }
-
     // Return detailed error message (but don't expose API key)
     const errorMessage = error?.message || 'Internal server error';
     const safeErrorMessage = errorMessage.includes('OPENAI_API_KEY') 
       ? 'Server configuration error. Please contact support.'
       : errorMessage;
 
-    try {
-      return res.status(500).json({
-        error: safeErrorMessage || 'AI assistant is temporarily unavailable. Please try again later.',
-      });
-    } catch (sendError: any) {
-      console.error('[/api/chat] Failed to send error response:', sendError);
-    }
+    return res.status(500).json({
+      error: safeErrorMessage || 'AI assistant is temporarily unavailable. Please try again later.',
+    });
   }
 }
+
+// Wrap handler to catch any initialization errors
+const wrappedHandler = async (req: VercelRequest, res: VercelResponse) => {
+  try {
+    await handler(req, res);
+  } catch (error: any) {
+    console.error('[/api/chat] Unhandled error in wrapper:', error);
+    console.error('[/api/chat] Unhandled error stack:', error?.stack);
+    if (!res.headersSent) {
+      return res.status(500).json({
+        error: 'An unexpected error occurred. Please check the server logs.',
+      });
+    }
+  }
+};
+
+// Default export for Vercel - use wrapped handler to catch all errors
+export default wrappedHandler;
 

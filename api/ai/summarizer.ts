@@ -5,9 +5,29 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { callOpenAI, type ChatMessage } from '../openaiClient.js';
+import { callOpenAI, type ChatMessage } from '../../src/server/openaiClient';
 
-const SYSTEM_PROMPT = `You summarize academic and informational text. Keep the summary faithful to the original, with no new information. Return ONLY the summary text, with no explanations or commentary.`;
+const SYSTEM_PROMPT = `You summarize academic and informational text. Keep the summary faithful to the original, with no new information.
+
+Rules:
+- Preserve key facts and main ideas
+- Maintain the original meaning
+- Do NOT add information not in the original
+- Do NOT include your own opinions or interpretations
+- Return ONLY the summary text, no explanations or notes`;
+
+function getSummaryLength(length: string): string {
+  switch (length) {
+    case 'short':
+      return 'Summarize in 1-2 sentences. Include only the most essential information.';
+    case 'medium':
+      return 'Summarize in a brief paragraph (3-5 sentences). Include main points and key details.';
+    case 'detailed':
+      return 'Provide a detailed summary (2-3 paragraphs). Include main points, supporting details, and important context.';
+    default:
+      return 'Summarize in a brief paragraph. Include main points and key details.';
+  }
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -15,32 +35,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { text, length = 'medium' } = req.body;
+    const { text, length } = req.body;
 
     if (!text || typeof text !== 'string' || text.trim().length === 0) {
       return res.status(400).json({ error: 'Text is required' });
     }
 
-    // Map length to instructions
-    let lengthInstruction = '';
-    switch (length) {
-      case 'short':
-        lengthInstruction = 'Provide a very brief summary in 1-2 sentences.';
-        break;
-      case 'detailed':
-        lengthInstruction = 'Provide a detailed summary that captures most of the key points.';
-        break;
-      case 'medium':
-      default:
-        lengthInstruction = 'Provide a medium-length summary that captures the main points.';
-        break;
+    if (text.length > 20000) {
+      return res.status(400).json({ error: 'Text is too long. Maximum 20,000 characters.' });
     }
 
-    const userMessage = `${lengthInstruction}\n\nText to summarize:\n${text}`;
+    const lengthInstruction = getSummaryLength(length || 'medium');
 
     const messages: ChatMessage[] = [
       { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: userMessage },
+      { role: 'user', content: `${lengthInstruction}\n\nText to summarize:\n\n${text}` },
     ];
 
     const { reply } = await callOpenAI(messages);
@@ -55,3 +64,4 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 }
+

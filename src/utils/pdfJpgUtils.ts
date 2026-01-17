@@ -9,15 +9,10 @@ import { saveAs } from 'file-saver';
  * Convert PDF pages to JPG images
  */
 export async function convertPdfToJpg(_pdfFile: File): Promise<void> {
-  try {
-    // Note: pdf-lib doesn't render PDFs to images
-    // This would require pdfjs-dist or a server-side solution
-    // For now, we'll show an error message
-    throw new Error('PDF to JPG conversion requires additional libraries. This feature is coming soon.');
-  } catch (error: any) {
-    console.error('Error converting PDF to JPG:', error);
-    throw error;
-  }
+  // Note: pdf-lib doesn't render PDFs to images
+  // This would require pdfjs-dist or a server-side solution
+  // For browser-based implementation, pdf.js would be needed
+  throw new Error('PDF to JPG conversion requires advanced PDF rendering capabilities. Please use the JPG to PDF feature to combine images into PDFs, or use dedicated PDF software for PDF to image conversion.');
 }
 
 /**
