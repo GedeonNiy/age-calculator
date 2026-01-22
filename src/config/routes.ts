@@ -22,6 +22,12 @@ export const TOOL_ROUTES: NavRoute[] = [
   { viewId: 'view-date-difference', path: '/date-difference', label: 'Date Difference' },
   { viewId: 'view-bmi-calculator', path: '/bmi-calculator', label: 'BMI Calculator' },
   { viewId: 'view-mortgage-calculator', path: '/mortgage-calculator', label: 'Mortgage Calculator' },
+  { viewId: 'view-compound-interest-calculator', path: '/compound-interest', label: 'Compound Interest Calculator' },
+  { viewId: 'view-car-loan-calculator', path: '/car-loan-calculator', label: 'Car Loan Calculator' },
+  { viewId: 'view-pregnancy-due-date-calculator', path: '/pregnancy-due-date', label: 'Pregnancy Due Date Calculator' },
+  { viewId: 'view-gpa-calculator', path: '/gpa-calculator', label: 'GPA Calculator' },
+  { viewId: 'view-income-tax-calculator', path: '/income-tax', label: 'Income Tax Calculator' },
+  { viewId: 'view-currency-converter', path: '/currency-converter', label: 'Currency Converter' },
 ];
 
 // Create route to view mapping

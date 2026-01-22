@@ -29,6 +29,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     tools: [
       { name: 'Age Calculator', path: '/age-calculator', icon: '🎂' },
       { name: 'Date Difference Calculator', path: '/date-difference', icon: '📆' },
+      { name: 'Pregnancy Due Date Calculator', path: '/pregnancy-due-date', icon: '👶' },
     ],
   },
   {
@@ -36,6 +37,10 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     title: 'Finance',
     tools: [
       { name: 'Mortgage Calculator', path: '/mortgage-calculator', icon: '🏠' },
+      { name: 'Car Loan Calculator', path: '/car-loan-calculator', icon: '🚗' },
+      { name: 'Compound Interest Calculator', path: '/compound-interest', icon: '💰' },
+      { name: 'Income Tax Calculator', path: '/income-tax', icon: '📊' },
+      { name: 'Currency Converter', path: '/currency-converter', icon: '💱' },
     ],
   },
   {
@@ -43,6 +48,13 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     title: 'Health',
     tools: [
       { name: 'BMI Calculator', path: '/bmi-calculator', icon: '⚖️' },
+    ],
+  },
+  {
+    id: 'education',
+    title: 'Education',
+    tools: [
+      { name: 'GPA Calculator', path: '/gpa-calculator', icon: '📚' },
     ],
   },
 ];

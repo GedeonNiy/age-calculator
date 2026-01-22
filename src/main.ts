@@ -7,6 +7,12 @@ import { initAgeCalculator } from './pages/ageCalculator'
 import { initBMICalculator } from './pages/bmiCalculator'
 import { initMortgageCalculator } from './pages/mortgageCalculator'
 import { initDateDifferenceCalculator } from './pages/dateDifferenceCalculator'
+import { initCompoundInterestCalculator } from './pages/compoundInterestCalculator'
+import { initCarLoanCalculator } from './pages/carLoanCalculator'
+import { initPregnancyDueDateCalculator } from './pages/pregnancyDueDateCalculator'
+import { initGPACalculator } from './pages/gpaCalculator'
+import { initIncomeTaxCalculator } from './pages/incomeTaxCalculator'
+import { initCurrencyConverter } from './pages/currencyConverter'
 import { routeToView } from './config/routes'
 
 interface AgeResult {
@@ -155,6 +161,12 @@ const viewInitializers: Record<string, () => void> = {
   'view-date-difference': initDateDifferenceCalculator,
   'view-bmi-calculator': initBMICalculator,
   'view-mortgage-calculator': initMortgageCalculator,
+  'view-compound-interest-calculator': initCompoundInterestCalculator,
+  'view-car-loan-calculator': initCarLoanCalculator,
+  'view-pregnancy-due-date-calculator': initPregnancyDueDateCalculator,
+  'view-gpa-calculator': initGPACalculator,
+  'view-income-tax-calculator': initIncomeTaxCalculator,
+  'view-currency-converter': initCurrencyConverter,
 };
 
 // Track if views have been initialized

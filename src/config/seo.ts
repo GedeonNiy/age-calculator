@@ -7,12 +7,12 @@ import type { SEOData } from '../utils/seo';
 export const SEO_CONFIG: Record<string, SEOData> = {
   'view-tools': {
     title: 'All Tools - Smart Tools Hub | Free Online Calculators',
-    description: 'Browse our complete collection of free online calculators organized by category. Date & Time, Finance, Health, Education tools and more.',
+    description: 'Browse our collection of 10+ free online calculators: Age, Date Difference, BMI, Mortgage, Compound Interest, Car Loan, Pregnancy Due Date, GPA, Income Tax, and Currency Converter.',
     path: '/tools',
   },
   'view-home': {
     title: 'Smart Tools Hub – Free Online Calculators',
-    description: 'Free, no sign-in online calculators for dates, finance, health, education and more. Smart Tools Hub offers 10+ fast, accurate tools in one place.',
+    description: 'Free, no sign-in online calculators for dates, finance, health, and education. Smart Tools Hub offers 10+ fast, accurate tools including age, date, BMI, mortgage, compound interest, and more.',
     path: '/',
   },
   'view-age-calculator': {
@@ -25,95 +25,45 @@ export const SEO_CONFIG: Record<string, SEOData> = {
     description: 'Find the precise difference between any two dates in years, months, weeks, and days using this date difference calculator.',
     path: '/date-difference',
   },
-  'view-pregnancy-due-date-calculator': {
-    title: 'Pregnancy Due Date Calculator – Estimate Your Baby\'s Arrival',
-    description: 'Estimate your pregnancy due date and track your progress week by week with this easy due date calculator.',
-    path: '/pregnancy-due-date',
-  },
   'view-mortgage-calculator': {
     title: 'Mortgage Calculator – Monthly Payment & Amortization',
     description: 'Calculate your monthly mortgage payment, total interest, payoff time and full amortization schedule with this smart mortgage calculator.',
     path: '/mortgage-calculator',
-  },
-  'view-car-loan-calculator': {
-    title: 'Car Loan Calculator – Auto Payment & Interest',
-    description: 'Estimate your monthly car payment, total interest, and payoff time with this free car loan calculator.',
-    path: '/car-loan-calculator',
-  },
-  'view-compound-interest-calculator': {
-    title: 'Compound Interest Calculator – Grow Your Savings',
-    description: 'See how your money grows over time with this compound interest calculator. Adjust principal, rate, contributions and years.',
-    path: '/compound-interest',
-  },
-  'view-income-tax-calculator': {
-    title: 'Income Tax Calculator – Estimate Your Take-Home Pay',
-    description: 'Estimate your income tax and approximate take-home pay with this simple income tax calculator.',
-    path: '/income-tax',
-  },
-  'view-currency-converter': {
-    title: 'Currency Converter – Real-Time Exchange Rates',
-    description: 'Convert between popular currencies using live or regularly updated exchange rates with this free currency converter.',
-    path: '/currency-converter',
-  },
-  'view-plagiarism-checker': {
-    title: 'Plagiarism / Text Similarity Checker – Smart Tools Hub',
-    description: 'Compare two texts locally to check for similarity. Free local text comparison tool for students and writers.',
-    path: '/plagiarism-checker',
-  },
-  'view-pdf-to-word': {
-    title: 'PDF to Word Converter – Free PDF to DOCX Tool',
-    description: 'Convert PDF files to Word documents (.docx). Extract text from PDFs for editing.',
-    path: '/pdf-to-word',
-  },
-  'view-word-to-pdf': {
-    title: 'Word to PDF Converter – Free DOCX to PDF Tool',
-    description: 'Convert Word documents (.docx) or paste text to create a PDF file instantly.',
-    path: '/word-to-pdf',
-  },
-  'view-text-to-speech': {
-    title: 'Text-to-Speech Converter – Free TTS Tool',
-    description: 'Convert text to speech using your browser. Listen to your notes, essays, or reading assignments.',
-    path: '/text-to-speech',
-  },
-  'view-essay-improver': {
-    title: 'AI Essay Improver – Improve Your Writing',
-    description: 'AI-powered tool to improve clarity, grammar, and readability of your writing while preserving meaning.',
-    path: '/essay-improver',
-  },
-  'view-summarizer': {
-    title: 'Text Summarizer – AI-Powered Summary Tool',
-    description: 'Summarize long articles, chapters, or notes using AI. Get concise summaries while preserving key information.',
-    path: '/summarizer',
-  },
-  'view-pdf-jpg-converter': {
-    title: 'PDF ↔ JPG Converter – Free Image Conversion Tool',
-    description: 'Convert PDF pages to JPG images or combine multiple images into a PDF document.',
-    path: '/pdf-jpg-converter',
-  },
-  'view-citation-generator': {
-    title: 'Citation Generator – APA & MLA Citation Tool',
-    description: 'Generate properly formatted citations in APA or MLA style for books, articles, websites, and YouTube videos.',
-    path: '/citation-generator',
-  },
-  'view-grammar-checker': {
-    title: 'Grammar & Spelling Checker – AI Grammar Tool',
-    description: 'Check and correct grammar, spelling, and punctuation errors in your text using AI.',
-    path: '/grammar-checker',
-  },
-  'view-pdf-merge-split': {
-    title: 'PDF Merger & Splitter – Combine or Split PDFs',
-    description: 'Merge multiple PDF files into one document, or split a PDF into separate pages.',
-    path: '/pdf-merge-split',
   },
   'view-bmi-calculator': {
     title: 'BMI Calculator – Body Mass Index',
     description: 'Calculate your BMI (Body Mass Index) using height and weight, and see which weight category you fall into.',
     path: '/bmi-calculator',
   },
+  'view-compound-interest-calculator': {
+    title: 'Compound Interest Calculator – Grow Your Savings',
+    description: 'Calculate how your savings grow over time with compound interest. See the power of compounding with regular monthly contributions.',
+    path: '/compound-interest',
+  },
+  'view-car-loan-calculator': {
+    title: 'Car Loan Calculator – Auto Payment & Interest',
+    description: 'Calculate your monthly car loan payment, total interest, and payoff date. Includes down payment, trade-in value, and sales tax.',
+    path: '/car-loan-calculator',
+  },
+  'view-pregnancy-due-date-calculator': {
+    title: 'Pregnancy Due Date Calculator – Estimate Your Baby\'s Arrival',
+    description: 'Calculate your pregnancy due date based on your last menstrual period. Track gestational age and trimester milestones.',
+    path: '/pregnancy-due-date',
+  },
   'view-gpa-calculator': {
     title: 'GPA Calculator – Grade Point Average',
-    description: 'Compute your GPA quickly with this grade point average calculator for schools, colleges, and universities.',
+    description: 'Calculate your GPA (Grade Point Average) quickly and accurately. Supports multiple grading scales and weighted courses.',
     path: '/gpa-calculator',
+  },
+  'view-income-tax-calculator': {
+    title: 'Income Tax Calculator – Estimate Your Take-Home Pay',
+    description: 'Estimate your federal income tax and take-home pay. Calculate tax brackets and effective tax rate for single or married filing status.',
+    path: '/income-tax',
+  },
+  'view-currency-converter': {
+    title: 'Currency Converter – Real-Time Exchange Rates',
+    description: 'Convert between popular currencies using up-to-date exchange rates. Free currency conversion for USD, EUR, GBP, JPY, and more.',
+    path: '/currency-converter',
   },
   'view-about': {
     title: 'About Smart Tools Hub',
