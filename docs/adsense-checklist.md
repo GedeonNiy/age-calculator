@@ -141,3 +141,4 @@ This document tracks AdSense verification assets and requirements for Smart Tool
 - Route changes trigger scroll to top automatically
 - Footer includes verification links (Sitemap, Robots, Ads.txt) for easy access
 
+

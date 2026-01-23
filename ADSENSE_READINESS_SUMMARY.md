@@ -288,3 +288,4 @@ The site is now fully AdSense-ready with:
 - ✅ Mobile responsive
 - ✅ Scroll to top on navigation
 
+
